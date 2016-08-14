@@ -1,0 +1,30 @@
+{
+    "version": "1.8.10",
+    "compilerOptions": {
+        "target": "es5",
+        "module": "commonjs",
+        "declaration": false,
+        "outDir": "dist/",
+        "experimentalDecorators": true,
+        "jsx": "react"
+    },
+    "filesGlob": [
+        "./evaluation/**/*.ts",
+        "./shared/**/*.ts",
+        "./test/**/*.ts",
+        "./type-system/**/*.ts",
+        "!./node_modules/**/*.ts"
+    ],
+    "files": [
+        "./evaluation/evaluator.ts",
+        "./shared/base-semantics-types.ts",
+        "./shared/cli.ts",
+        "./shared/context.ts",
+        "./shared/issues.ts",
+        "./shared/mapper.ts",
+        "./shared/semantics-types.ts",
+        "./shared/stdin.ts",
+        "./shared/util.ts",
+        "./test/test-all.ts"
+    ]
+}

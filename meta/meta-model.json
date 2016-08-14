@@ -1,0 +1,36 @@
+{
+	"binary operation": {
+		"operator": { "type": "string" },
+		"left": { "type": "any" },
+		"right": { "type": "any" }
+	},
+	"comments": {
+		"sections": { "type": "string", "stringMap": true }
+	},
+	"function application": {
+		"function": { "type": "any" },
+		"arguments": { "type": "any", "stringMap": true }
+	},
+	"function definition": {
+		"name": { "type": "string" },
+		"parameters": { "type": "string", "stringMap": true },
+		"returnType": { "type": "string", "optional": true },
+		"body": { "type": "any" }
+	},
+	"function reference": {
+		"name": { "type": "string" }
+	},
+	"if-then-else": {
+		"condition": { "type": "any" },
+		"trueBranch": { "type": "any" },
+		"falseBranch": { "type": "any" }
+	},
+	"issue": {
+		"message": { "type": "string" },
+		"object": { "type": "Object", "optional": true },
+		"causedBy": { "type": "issue", "ownType": true, "optional": true }
+	},
+	"value reference": {
+		"name": { "type": "string" }
+	}
+}

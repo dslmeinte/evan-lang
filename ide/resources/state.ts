@@ -1,0 +1,32 @@
+/// <reference path="../../typings/tsd.d.ts" />
+
+import {observable} from "mobx";
+
+const resourceFib = require("json!../../data/fib.json");
+const resourceSimple = require("json!../../data/simple.json");
+const resourceSimpleFunc = require("json!../../data/simple-func.json");
+
+export class ResourcesState {
+
+	@observable private _resourcesMap: { [path: string]: any } = {};
+
+	addResource(path: string, jsonData: any) {
+		this._resourcesMap[path] = jsonData;
+	}
+
+	resourceByPath(path: string) {
+		return this._resourcesMap[path];
+	}
+
+	resourcesAsMap() {
+		return this._resourcesMap;
+	}
+
+}
+
+export const resourcesState = new ResourcesState();
+
+resourcesState.addResource("fib", resourceFib);
+resourcesState.addResource("simple", resourceSimple);
+resourcesState.addResource("simple-func", resourceSimpleFunc);
+

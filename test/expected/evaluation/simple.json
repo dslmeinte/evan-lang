@@ -1,0 +1,16 @@
+[
+  {
+    "$sType": "issue",
+    "message": "Cannot evaluate object with sType=\"the answer\".",
+    "object": {
+      "$sType": "the answer",
+      "to the ultimate": "question",
+      "about": [
+        "life",
+        "the universe",
+        "everything!"
+      ]
+    }
+  },
+  null
+]

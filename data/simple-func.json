@@ -1,0 +1,17 @@
+[
+	{
+		"$sType": "function definition",
+		"name": "f",
+		"parameters": {},
+		"returnType": "number",
+		"body": 42
+	},
+	{
+		"$sType": "function application",
+		"function": {
+			"$sType": "function reference",
+			"name": "f"
+		},
+		"arguments": {}
+	}
+]

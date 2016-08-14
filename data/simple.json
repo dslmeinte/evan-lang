@@ -1,0 +1,14 @@
+[
+	{
+		"$sType": "the answer",
+		"to the ultimate": "question",
+		"about": [ "life", "the universe", "everything!" ]
+	},
+	{
+		"$sType": "comments",
+		"sections": {
+			"description": "We can do comments.",
+			"semantics": "A comments Object will be substituted with undefined for evaluation."
+		}
+	}
+]
