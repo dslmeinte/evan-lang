@@ -4,6 +4,7 @@ import {observer} from "mobx-react";
 import * as React from "react";
 
 import {dispatch} from "../dispatcher";
+import {editorState} from "../state";
 import {IBinaryOperation} from "../../../shared/semantics-types";
 
 
@@ -13,7 +14,7 @@ export class BinaryOperation<T> extends React.Component<{ binaryOperation: IBina
 	render() {
 		const {binaryOperation} = this.props;
 		return (
-			<div>
+			<div onClick={editorState.actionSelectItem(this)} className={editorState.cssClassForSelection(this)}>
 				{dispatch(binaryOperation.left)}
 				<span>{binaryOperation.operator}</span>
 				{dispatch(binaryOperation.right)}

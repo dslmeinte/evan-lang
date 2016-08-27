@@ -3,6 +3,7 @@
 import {observer} from "mobx-react";
 import * as React from "react";
 
+import {editorState} from "../state";
 import {IFunctionReference} from "../../../shared/semantics-types";
 
 
@@ -11,7 +12,11 @@ export class FunctionReference<T> extends React.Component<{ functionReference: I
 
 	render() {
 		const {functionReference} = this.props;
-		return (<span><em>{functionReference.name}</em></span>);
+		return (
+			<span onClick={editorState.actionSelectItem(this)} className={editorState.cssClassForSelection(this)}>
+				<em>{functionReference.name}</em>
+			</span>
+		);
 	}
 
 }

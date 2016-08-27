@@ -3,15 +3,25 @@
 Roughly in order of importance.
 
 * Extend visualizer with selecting and editing (and folding) capabilities:
-	1. Be able to select rendered components.
-	2. Provide sensible edit icons.
-	3. Provide edit mode for every component.
-	4. Provide generic "add something" component.
-	For this, look at: [react-json](https://github.com/arqex/react-json)
+	* &#10003; Be able to select rendered components.
+	* Provide generic "add something" component.
+		(For this, look at: [react-json](https://github.com/arqex/react-json).)
+	* Provide edit mode for every component.
+	* Provide sensible edit icons.
 * Introduce semantics types for:
-	* Changing the own JSON in some way (e.g. using a JSON Patch-like expression) - for using in an action.
+	* Defining an immutable value.
+	* Defining a mutable value - *if we want to allow that*.
+	* Aggregating JSON contents from resource.
+	* Changing some aggregated JSON in some way (e.g. using a JSON Patch-like expression) - for using in an action.
 	* Indicating that some stuff is to be rendered as HTML/React component.
 	* Defining types *and interpreters on them*.
+	* Calling functions in JavaScript space.
+	* Doing ES6-style imports that actually execute a `require` (of something that can receive a version specification).
+		To execute such programs we need some way of dynamically calling `npm install` and loading the result
+			- see this [StackoverFlow answer](http://stackoverflow.com/questions/15957529/can-i-install-a-npm-package-from-javascript-running-in-node-js/15957574#15957574).
+		Having this capability and the previous one, enables us to tap into the rich JavaScript ecology.
+	* A way to keep the interpretation from finishing, to be able to define servers.
+* &#10003; Move to Browserify over WebPack - see e.g. the [`tsify` plugin for compiling TS in Browserify](https://www.npmjs.com/package/tsify).
 * Implement a type checker.
 * Extend IDE with instant type checking of source.
 * Implement Lisp-style macro's.

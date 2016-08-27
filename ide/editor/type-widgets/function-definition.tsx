@@ -4,6 +4,7 @@ import {observer} from "mobx-react";
 import * as React from "react";
 
 import {dispatch} from "../dispatcher";
+import {editorState} from "../state";
 import {IFunctionDefinition} from "../../../shared/semantics-types";
 import {mapMap} from "../../../shared/util";
 
@@ -14,7 +15,7 @@ export class FunctionDefinition<T> extends React.Component<{ functionDefinition:
 	render() {
 		const {functionDefinition} = this.props;
 		return (
-			<div>
+			<div onClick={editorState.actionSelectItem(this)} className={editorState.cssClassForSelection(this)}>
 				<span><b>define</b> </span><span><em>{functionDefinition.name}</em></span><span>(</span>
 					{mapMap(functionDefinition.parameters, (paramName, type) => (
 						<div className="indent" key={paramName}>
