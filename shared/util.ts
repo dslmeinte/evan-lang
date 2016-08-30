@@ -21,10 +21,6 @@ export function isArray(json: any) {
 	return isArray(json) || isObservableArray(json);
 }
 
-export function prettyJson(json: any) {
-	return JSON.stringify(json, null, 2);
-}
-
 
 export function mapMap<V, R>(map: { [key: string]: V; }, func: (key: string, value: V) => R): R[] {
 	return Object.keys(map).map(key => func(key, map[key]));
@@ -44,11 +40,7 @@ export function toFirstUpper(str: string) {
 }
 
 
-export function logError(err: Error) {
-	console.error(`${err instanceof SyntaxError ? "Could not parse stdin as JSON" : "Something went wrong"}: ${err}`);
-	console.error(err.stack);
+export function prettyJson(json: any) {
+	return JSON.stringify(json, null, 2);
 }
-
-
-export const encodingOptions = { encoding: "utf8" };
 

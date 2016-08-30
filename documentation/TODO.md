@@ -1,6 +1,7 @@
 # TODO
 
 Roughly in order of importance.
+Done items are prepended with "&#10003;".
 
 * Extend visualizer with selecting and editing (and folding) capabilities:
 	* &#10003; Be able to select rendered components.
@@ -25,4 +26,12 @@ Roughly in order of importance.
 * Implement a type checker.
 * Extend IDE with instant type checking of source.
 * Implement Lisp-style macro's.
+* Small things:
+	* &#10003; Commit TSD typings to repo as the `tsd` module takes 21M.
+		Also: factor typings better by distinguishing Node.js vs. Browserify usage.
+	* &#10003; Don't use `nscript` (whose installation is kinda heavy) unless actually convenient.
+	* &#10003; Replace various CLI dependencies with `npm`-able, OS-independent alternatives: `rimraf`.
+		Can we also replace `mkdir -p` and `diff` with NPM alternatives?
+* Implement hot reload - see e.g. [this GitHub repo](https://github.com/milankinen/livereactload).
+* Update to TypeScript 2.0 and make use of tagged unions for `ISemanticsTyped.$sType`.
 

@@ -2,9 +2,8 @@
   "name": "evan-lang",
   "version": "0.0.1",
   "description": "A vaguely Lispy language in the context of JavaScript.",
-  "main": "interpreter.js",
   "scripts": {
-    "postinstall": "tsd reinstall && mkdir -p test/actual/evaluation",
+    "postinstall": "mkdir -p test/actual",
     "build": "tsc",
     "prebuild": "npm run build-meta && tsconfig",
     "test": "node dist/test/test-all.js && diff --recursive test/actual/ test/expected/",
@@ -13,28 +12,25 @@
     "prestart": "npm run build-web",
     "build-web": "browserify ide/index.tsx -p [ tsify ] > ide/web/bundle.js",
     "prebuild-web": "npm run build",
-    "build-meta": "node meta/build-meta.js"
+    "build-meta": "node meta/build-meta.js",
+    "clean": "rimraf ide/editor/type-widgets/*.tsx_gen && rimraf test/actual && rimraf dist && rimraf node_modules"
   },
   "author": "Meinte Boersma",
   "license": "MIT",
   "dependencies": {
-    "http-server": "^0.9.0",
-    "mobx": "^2.3.5",
-    "mobx-react": "^3.5.0",
-    "nscript": "^0.1.7",
-    "react": "^15.2.1",
-    "react-dom": "^15.2.1"
+    "lodash": "4.15.0",
+    "mobx": "2.3.5",
+    "mobx-react": "3.5.0",
+    "react": "15.2.1",
+    "react-dom": "15.2.1"
   },
   "devDependencies": {
     "browserify": "^13.1.0",
     "camelcase": "^3.0.0",
-    "json-loader": "^0.5.4",
-    "lodash": "^4.14.0",
-    "node-debug": "^0.1.0",
+    "http-server": "^0.9.0",
     "path": "^0.12.7",
-    "ts-loader": "^0.8.2",
+    "rimraf": "^2.5.4",
     "tsconfig-glob": "^0.4.3",
-    "tsd": "^0.6.5",
     "tsify": "^1.0.4",
     "typescript": "^1.8.10"
   }

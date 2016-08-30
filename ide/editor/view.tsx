@@ -1,9 +1,7 @@
-/// <reference path="../../typings/tsd.d.ts" />
-
 import {observer} from "mobx-react";
 import * as React from "react";
 
-import {evaluate} from "../../evaluation/evaluator";
+import {evaluate} from "../../shared/evaluator";
 import {dispatch} from "./dispatcher";
 import {editorState} from "./state";
 import {prettyJson} from "../../shared/util";

@@ -2,7 +2,6 @@ dist/
 ide/web/bundle.js
 node_modules/
 test/actual/
-typings/
 
 **/*_gen
 

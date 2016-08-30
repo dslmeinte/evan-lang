@@ -66,8 +66,6 @@ function generatePolymorphicDispatcher(metaModel) {
 
 function generateTypeWidgetSkeleton(typeName) {
 	return [
-		"/// <reference path=\"../../../typings/tsd.d.ts\" />",
-		"",
 		"import {observer} from \"mobx-react\";",
 		"import * as React from \"react\";",
 		"",

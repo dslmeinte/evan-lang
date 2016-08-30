@@ -1,5 +1,3 @@
-/// <reference path="../../typings/tsd.d.ts" />
-
 import {observable} from "mobx";
 
 const resourceFib = require("../../data/fib.json");

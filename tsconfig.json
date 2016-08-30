@@ -16,15 +16,15 @@
         "!./node_modules/**/*.ts"
     ],
     "files": [
-        "./evaluation/evaluator.ts",
+        "./shared/typings.d.ts",
         "./shared/base-semantics-types.ts",
-        "./shared/cli.ts",
         "./shared/context.ts",
+        "./shared/evaluator.ts",
         "./shared/issues.ts",
         "./shared/mapper.ts",
         "./shared/semantics-types.ts",
-        "./shared/stdin.ts",
         "./shared/util.ts",
+        "./test/cli.ts",
         "./test/test-all.ts"
     ]
 }

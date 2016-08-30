@@ -1,4 +1,4 @@
-/// <reference path="../typings/tsd.d.ts" />
+/// <reference path="./typings.d.ts" />
 
 import {isBoolean, isString} from "lodash";
 
