@@ -66,12 +66,11 @@ function generatePolymorphicDispatcher(metaModel) {
 
 function generateTypeWidgetSkeleton(typeName) {
 	return [
-		"/// <reference path=\"../../../typings/tsd.d.ts\" />",
-		"",
 		"import {observer} from \"mobx-react\";",
 		"import * as React from \"react\";",
 		"",
 		"import {dispatch} from \"../dispatcher\";",
+		"import {editorState} from \"../state\";",
 		"import {IFunctionApplication} from \"../../../shared/semantics-types\";",
 		"",
 		"",
@@ -79,7 +78,7 @@ function generateTypeWidgetSkeleton(typeName) {
 		"export class " + classTypeName(typeName) + "<T> extends React.Component<{ " + attributeName(typeName) + ": " + interfaceTypeName(typeName) + "; }, {}> {",
 		"",
 		"\trender() {",
-		"\t\tconst {" + interfaceTypeName(typeName) + "} = this.props;",
+		"\t\tconst {" + attributeName(typeName) + "} = this.props;",
 		"\t}",
 		"",
 		"}"

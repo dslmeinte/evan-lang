@@ -1,8 +1,7 @@
-/// <reference path="../../../typings/tsd.d.ts" />
-
 import {observer} from "mobx-react";
 import * as React from "react";
 
+import {editorState} from "../state";
 import {IValueReference} from "../../../shared/semantics-types";
 
 
@@ -11,7 +10,11 @@ export class ValueReference<T> extends React.Component<{ valueReference: IValueR
 
 	render() {
 		const {valueReference} = this.props;
-		return (<span><em>{valueReference.name}</em></span>);
+		return (
+			<span onClick={editorState.actionSelectItem(this)} className={editorState.cssClassForSelection(this)}>
+				<em>{valueReference.name}</em>
+			</span>
+		);
 	}
 
 }

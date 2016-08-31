@@ -1,5 +1,3 @@
-/// <reference path="../typings/tsd.d.ts" />
-
 import {isObject} from "lodash";
 
 import {IContext} from "../shared/context";

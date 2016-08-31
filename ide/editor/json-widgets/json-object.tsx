@@ -1,8 +1,7 @@
-/// <reference path="../../../typings/tsd.d.ts" />
-
 import {observer} from "mobx-react";
 import * as React from "react";
 
+import {editorState} from "../state";
 import {forEachProperty} from "../../../shared/util";
 import {JsonProperty} from "./json-property";
 
@@ -15,7 +14,7 @@ export class JsonObject<T> extends React.Component<{ object: Object; }, {}> {
 		const propertyNames = [];
 		forEachProperty(object, (name, value) => { propertyNames.push(name); });
 		return (
-			<div className="indent">
+			<div onClick={editorState.actionSelectItem(this)} className={"indent " + editorState.cssClassForSelection(this)}>
 				<span>{"{"}</span>
 					{propertyNames.map(name => <JsonProperty name={name} value={object[name]} />)}
 				<span>{"}"}</span>

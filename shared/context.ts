@@ -1,5 +1,3 @@
-/// <reference path="../typings/tsd.d.ts" />
-
 import {cloneDeep} from "lodash";
 
 import * as sTypes from "../shared/semantics-types";

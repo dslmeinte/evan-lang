@@ -1,10 +1,8 @@
-/// <reference path="../../typings/tsd.d.ts" />
-
 import {observable} from "mobx";
 
-const resourceFib = require("json!../../data/fib.json");
-const resourceSimple = require("json!../../data/simple.json");
-const resourceSimpleFunc = require("json!../../data/simple-func.json");
+const resourceFib = require("../../data/fib.json");
+const resourceSimple = require("../../data/simple.json");
+const resourceSimpleFunc = require("../../data/simple-func.json");
 
 export class ResourcesState {
 

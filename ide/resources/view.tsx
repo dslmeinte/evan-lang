@@ -1,29 +1,27 @@
-/// <reference path="../../typings/tsd.d.ts" />
-
 import {observer} from "mobx-react";
 import * as React from "react";
 
-import {ResourcesState} from "./state";
-import {EditorState} from "../editor/state";
+import {resourcesState} from "./state";
+import {editorState} from "../editor/state";
 
 
 @observer
-export class ResourcesView extends React.Component<{ resources: ResourcesState, editorState: EditorState }, {}> {
+export class ResourcesView extends React.Component<{}, {}> {
 
 	render() {
-		const {resources, editorState} = this.props;
 		return (
 			<div>
+				<span>Click on any of the following resources to load it:</span>
 				<ul>
-					{Object.keys(resources.resourcesAsMap()).map(path => <li key={path} onClick={this.loadResource(path)}>{path}</li>)}
+					{Object.keys(resourcesState.resourcesAsMap()).map(path => <li key={path} onClick={this.loadResource(path)}>{path}</li>)}
 				</ul>
-				<span>{editorState.pathLoaded ? `file loaded: ${editorState.pathLoaded}` : "no file loaded"}</span>
+				<span>{editorState.pathLoaded ? `File loaded: ${editorState.pathLoaded}` : "no file loaded"}</span>
 			</div>
 		);
 	}
 
 	loadResource(path: string) {
-		return () => { this.props.editorState.setResource(path, this.props.resources.resourceByPath(path)); };
+		return () => { editorState.setResource(path, resourcesState.resourceByPath(path)); };
 	}
 
 }

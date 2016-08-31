@@ -17,7 +17,7 @@ export function dispatch(json: any, key?: string) {
 			return component === null
 				? (
 					<div className="indent">
-						<span><em>Cannot handle semantics type "{sType(json)}" yet.</em></span>
+						<span><em>Cannot visualize object with semantics type "{sType(json)}" (yet?).</em></span>
 						<pre>{prettyJson(json)}</pre>
 					</div>
 				)
