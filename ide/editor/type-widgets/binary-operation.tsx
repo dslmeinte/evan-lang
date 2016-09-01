@@ -3,7 +3,7 @@ import * as React from "react";
 
 import {dispatch} from "../dispatcher";
 import {editorState} from "../state";
-import {IBinaryOperation} from "../../../shared/semantics-types";
+import {IBinaryOperation} from "../../../shared/semantics-types_gen";
 
 
 @observer

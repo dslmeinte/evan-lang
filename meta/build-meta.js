@@ -9,15 +9,21 @@ const metaModel = JSON.parse(fs.readFileSync(__dirname + "/meta-model.json", enc
 
 // TODO  check meta model
 
-writeLines(generateSemanticsTypes(metaModel), "shared/semantics-types.ts");
-writeLines(generatePolymorphicDispatcher(metaModel), "ide/editor/polymorphic-dispatcher.tsx");
+writeLines(generateSemanticsTypes(metaModel), "shared/semantics-types_gen.ts");
+writeLines(generatePolymorphicDispatcher(metaModel), "ide/editor/polymorphic-dispatcher_gen.tsx");
 mapMap(metaModel, function (typeName) {
 	writeLines(generateTypeWidgetSkeleton(typeName), "ide/editor/type-widgets/" + fileName(typeName) + ".tsx_gen");
 });
 
 
 function generateSemanticsTypes(metaModel) {
+
 	function generateTsProperty(propertyName, description) {
+		// skip everything which has an "$sType" such as comments:
+		if (!!description.$sType) {
+			return [];
+		}
+
 		const tsType = !! description.ownType
 			? interfaceTypeName(description.type)
 			: description.type;
@@ -26,6 +32,7 @@ function generateSemanticsTypes(metaModel) {
 			: tsType;
 		return [ "\t" + propertyName + (description.optional ? "?" : "") + ": " + tsCompoundType + ";" ];
 	}
+
 	function generateTsInterface(typeName, propertiesMap) {
 		return [
 			"export interface " + interfaceTypeName(typeName) + " extends ISemanticsTyped {"
@@ -35,13 +42,16 @@ function generateSemanticsTypes(metaModel) {
 			""
 		]);
 	}
+
 	return [
 		"import {ISemanticsTyped} from \"./base-semantics-types\";",
 		"",
 		""
 	].concat(mapMap(metaModel, generateTsInterface))
 	.concat([""]);
+
 }
+
 
 function generatePolymorphicDispatcher(metaModel) {
 	return [
@@ -64,6 +74,7 @@ function generatePolymorphicDispatcher(metaModel) {
 	]);
 }
 
+
 function generateTypeWidgetSkeleton(typeName) {
 	return [
 		"import {observer} from \"mobx-react\";",
@@ -71,7 +82,7 @@ function generateTypeWidgetSkeleton(typeName) {
 		"",
 		"import {dispatch} from \"../dispatcher\";",
 		"import {editorState} from \"../state\";",
-		"import {IFunctionApplication} from \"../../../shared/semantics-types\";",
+		"import {IFunctionApplication} from \"../../../shared/semantics-types_gen\";",
 		"",
 		"",
 		"@observer",
@@ -85,29 +96,36 @@ function generateTypeWidgetSkeleton(typeName) {
 	];
 }
 
+
 function classTypeName(typeName) {
 	return toFirstUpper(camelCase(typeName));
 }
+
 
 function interfaceTypeName(typeName) {
 	return "I" + classTypeName(typeName);
 }
 
+
 function attributeName(typeName) {
 	return camelCase(typeName);
 }
+
 
 function fileName(typeName) {
 	return typeName.replace(" ", "-");
 }
 
+
 function writeLines(lines, path) {
 	fs.writeFileSync(path, lodash.flatten(lines).join("\n"), encodingOpts);
 }
 
+
 function toFirstUpper(str) {
 	return str.charAt(0).toUpperCase() + str.slice(1);
 }
+
 
 function mapMap(map, func) {
 	return Object.keys(map).map(function (key) { return func(key, map[key]); });

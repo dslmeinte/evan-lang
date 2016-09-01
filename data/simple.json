@@ -6,9 +6,6 @@
 	},
 	{
 		"$sType": "comments",
-		"sections": {
-			"description": "We can do comments.",
-			"semantics": "A comments Object will be substituted with undefined for evaluation."
-		}
+		"text": "A comments Object will be substituted with undefined for evaluation."
 	}
 ]

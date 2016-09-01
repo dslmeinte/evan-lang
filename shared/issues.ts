@@ -1,6 +1,6 @@
 import {isObject} from "lodash";
 
-import {IIssue} from "../shared/semantics-types";
+import {IIssue} from "../shared/semantics-types_gen";
 
 
 

@@ -1,9 +1,7 @@
 [
 	{
 		"$sType": "comments",
-		"sections": {
-			"description": "Calculation of Fibonacci numbers"
-		}
+		"text": "Calculation of Fibonacci numbers"
 	},
 	{
 		"$sType": "function definition",

@@ -14,9 +14,11 @@ export class JsonObject<T> extends React.Component<{ object: Object; }, {}> {
 		const propertyNames = [];
 		forEachProperty(object, (name, value) => { propertyNames.push(name); });
 		return (
-			<div onClick={editorState.actionSelectItem(this)} className={"indent " + editorState.cssClassForSelection(this)}>
+			<div onClick={editorState.actionSelectItem(this)} className={editorState.cssClassForSelection(this)}>
 				<span>{"{"}</span>
-					{propertyNames.map(name => <JsonProperty name={name} value={object[name]} />)}
+					<div className="indent">
+						{propertyNames.map(name => <JsonProperty name={name} value={object[name]} key={name} />)}
+					</div>
 				<span>{"}"}</span>
 			</div>
 		);

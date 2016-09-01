@@ -3,7 +3,7 @@ import * as React from "react";
 
 import {dispatch} from "../dispatcher";
 import {editorState} from "../state";
-import {IIfThenElse} from "../../../shared/semantics-types";
+import {IIfThenElse} from "../../../shared/semantics-types_gen";
 
 
 @observer

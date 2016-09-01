@@ -3,7 +3,7 @@ import * as React from "react";
 
 import {dispatch} from "../dispatcher";
 import {editorState} from "../state";
-import {IFunctionApplication} from "../../../shared/semantics-types";
+import {IFunctionApplication} from "../../../shared/semantics-types_gen";
 import {mapMap} from "../../../shared/util";
 
 

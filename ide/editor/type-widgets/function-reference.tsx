@@ -2,7 +2,7 @@ import {observer} from "mobx-react";
 import * as React from "react";
 
 import {editorState} from "../state";
-import {IFunctionReference} from "../../../shared/semantics-types";
+import {IFunctionReference} from "../../../shared/semantics-types_gen";
 
 
 @observer

@@ -6,9 +6,13 @@ Done items are prepended with "&#10003;".
 * Extend visualizer with selecting and editing (and folding) capabilities:
 	* &#10003; Be able to select rendered components.
 	* Provide generic "add something" component.
-		(For this, look at: [react-json](https://github.com/arqex/react-json).)
-	* Provide edit mode for every component.
+		(
+			For this, look at: [react-json](https://github.com/arqex/react-json).
+			Effectively, we need first to be able to edit (as) plain JSON.
+		)
+	* Provide edit mode for every component (JSON widgets first).
 	* Provide sensible edit icons.
+	* Implement some logic to have widgets determine whether the visualization would fit in a `span` (1 line) or requires a `div`.
 * Introduce semantics types for:
 	* Defining an immutable value.
 	* Defining a mutable value - *if we want to allow that*.
@@ -32,6 +36,6 @@ Done items are prepended with "&#10003;".
 	* &#10003; Don't use `nscript` (whose installation is kinda heavy) unless actually convenient.
 	* &#10003; Replace various CLI dependencies with `npm`-able, OS-independent alternatives: `rimraf`.
 		Can we also replace `mkdir -p` and `diff` with NPM alternatives?
-* Implement hot reload - see e.g. [this GitHub repo](https://github.com/milankinen/livereactload).
+* Implement watching (&#10003;) or even hot reload - see e.g. [this GitHub repo](https://github.com/milankinen/livereactload).
 * Update to TypeScript 2.0 and make use of tagged unions for `ISemanticsTyped.$sType`.
 

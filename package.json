@@ -10,9 +10,11 @@
     "pretest": "npm run build",
     "start": "http-server -p 8031 ide/web",
     "prestart": "npm run build-web",
-    "build-web": "browserify ide/index.tsx -p [ tsify ] > ide/web/bundle.js",
+    "build-web-only": "browserify ide/index.tsx -p [ tsify ] -o ide/web/bundle.js",
+    "build-web": "npm run build-web-only",
     "prebuild-web": "npm run build",
     "build-meta": "node meta/build-meta.js",
+    "watch-web": "watchify ide/index.tsx -p [ tsify ] -o ide/web/bundle.js -v",
     "clean": "rimraf ide/editor/type-widgets/*.tsx_gen && rimraf test/actual && rimraf dist && rimraf node_modules"
   },
   "author": "Meinte Boersma",
@@ -32,6 +34,7 @@
     "rimraf": "^2.5.4",
     "tsconfig-glob": "^0.4.3",
     "tsify": "^1.0.4",
-    "typescript": "^1.8.10"
+    "typescript": "^1.8.10",
+    "watchify": "^3.7.0"
   }
 }

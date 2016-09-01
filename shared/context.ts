@@ -1,6 +1,6 @@
 import {cloneDeep} from "lodash";
 
-import * as sTypes from "../shared/semantics-types";
+import * as sTypes from "../shared/semantics-types_gen";
 
 
 export interface IContext {

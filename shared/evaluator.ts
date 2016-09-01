@@ -5,7 +5,7 @@ import {isBoolean, isString} from "lodash";
 import {IContext, cloneContext, emptyContext} from "../shared/context";
 import {makeIssue, isIssue} from "../shared/issues";
 import {makeMapper} from "../shared/mapper";
-import * as sTypes from "../shared/semantics-types";
+import * as sTypes from "../shared/semantics-types_gen";
 import {isSemanticsTyped} from "../shared/util";
 
 

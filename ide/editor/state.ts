@@ -1,5 +1,7 @@
 import {observable} from "mobx";
 
+import {preventBubbleUp} from "./util";
+
 
 export class EditorState {
 
@@ -23,8 +25,7 @@ export class EditorState {
 	actionSelectItem(item: any) {
 		return (e) => {
 			this.itemSelected = item;
-			e.stopPropagation();
-			e.preventDefault();
+			preventBubbleUp(e);
 		};
 	}
 

@@ -1,0 +1,21 @@
+html, body {
+	margin: 1em;
+	font: 10pt normal Arial, Helvetica, sans-serif; 
+}
+
+.indent {
+	margin-left: 2em;
+}
+
+pre {
+	margin: 0em;
+}
+
+.selected {
+	background: yellow;
+}
+
+.comments {
+	color: lightgreen;
+}
+

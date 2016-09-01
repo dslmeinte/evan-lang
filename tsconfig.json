@@ -22,7 +22,7 @@
         "./shared/evaluator.ts",
         "./shared/issues.ts",
         "./shared/mapper.ts",
-        "./shared/semantics-types.ts",
+        "./shared/semantics-types_gen.ts",
         "./shared/util.ts",
         "./test/cli.ts",
         "./test/test-all.ts"

@@ -2,7 +2,7 @@ import {isArray, isObject, isString} from "lodash";
 import {isObservableArray} from "mobx";
 
 
-export const TYPE_KEY_NAME = "$sType";
+const TYPE_KEY_NAME = "$sType";
 
 export function isSemanticsTyped(json: any) {
 	if (isObject(json)) {
@@ -16,6 +16,11 @@ export function sType(json: Object) {
 	return json[TYPE_KEY_NAME];
 }
 
+export function createOfSType(sType: string) {
+	return {
+		[TYPE_KEY_NAME]: sType
+	};
+}
 
 export function isArray(json: any) {
 	return isArray(json) || isObservableArray(json);
