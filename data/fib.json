@@ -64,74 +64,76 @@
 			}
 		}
 	},
-	{
-		"$sType": "function application",
-		"function": {
-			"$sType": "function reference",
-			"name": "fib"
+	[
+		{
+			"$sType": "function application",
+			"function": {
+				"$sType": "function reference",
+				"name": "fib"
+			},
+			"arguments": {
+				"n": 0
+			}
 		},
-		"arguments": {
-			"n": 0
-		}
-	},
-	{
-		"$sType": "function application",
-		"function": {
-			"$sType": "function reference",
-			"name": "fib"
+		{
+			"$sType": "function application",
+			"function": {
+				"$sType": "function reference",
+				"name": "fib"
+			},
+			"arguments": {
+				"n": 1
+			}
 		},
-		"arguments": {
-			"n": 1
-		}
-	},
-	{
-		"$sType": "function application",
-		"function": {
-			"$sType": "function reference",
-			"name": "fib"
+		{
+			"$sType": "function application",
+			"function": {
+				"$sType": "function reference",
+				"name": "fib"
+			},
+			"arguments": {
+				"n": 2
+			}
 		},
-		"arguments": {
-			"n": 2
-		}
-	},
-	{
-		"$sType": "function application",
-		"function": {
-			"$sType": "function reference",
-			"name": "fib"
+		{
+			"$sType": "function application",
+			"function": {
+				"$sType": "function reference",
+				"name": "fib"
+			},
+			"arguments": {
+				"n": 3
+			}
 		},
-		"arguments": {
-			"n": 3
-		}
-	},
-	{
-		"$sType": "function application",
-		"function": {
-			"$sType": "function reference",
-			"name": "fib"
+		{
+			"$sType": "function application",
+			"function": {
+				"$sType": "function reference",
+				"name": "fib"
+			},
+			"arguments": {
+				"n": 4
+			}
 		},
-		"arguments": {
-			"n": 4
-		}
-	},
-	{
-		"$sType": "function application",
-		"function": {
-			"$sType": "function reference",
-			"name": "fib"
+		{
+			"$sType": "function application",
+			"function": {
+				"$sType": "function reference",
+				"name": "fib"
+			},
+			"arguments": {
+				"n": 5
+			}
 		},
-		"arguments": {
-			"n": 5
+		{
+			"$sType": "function application",
+			"function": {
+				"$sType": "function reference",
+				"name": "fib"
+			},
+			"arguments": {
+				"n": 6
+			}
 		}
-	},
-	{
-		"$sType": "function application",
-		"function": {
-			"$sType": "function reference",
-			"name": "fib"
-		},
-		"arguments": {
-			"n": 6
-		}
-	}
+	]
 ]

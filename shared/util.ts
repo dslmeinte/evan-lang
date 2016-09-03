@@ -22,10 +22,10 @@ export function createOfSType(sType: string) {
 	};
 }
 
+
 export function isArray(json: any) {
 	return isArray(json) || isObservableArray(json);
 }
-
 
 export function mapMap<V, R>(map: { [key: string]: V; }, func: (key: string, value: V) => R): R[] {
 	return Object.keys(map).map(key => func(key, map[key]));
@@ -40,12 +40,7 @@ export function forEachProperty(object: Object, action: (name: string, value: an
 }
 
 
-export function toFirstUpper(str: string) {
-	return str.charAt(0).toUpperCase() + str.substring(1);
-}
-
-
 export function prettyJson(json: any) {
-	return JSON.stringify(json, null, 2);
+	return json === undefined ? "undefined" : JSON.stringify(json, null, 2);
 }
 

@@ -3,13 +3,20 @@ import {observable} from "mobx";
 import {preventBubbleUp} from "./util";
 
 
+export enum FocusType {
+	none, selected, editing
+}
+
+
 export class EditorState {
 
 	@observable pathLoaded: string = null;
 
 	@observable jsonData: any = null;
 
-	@observable itemSelected: any = null;
+	@observable itemFocused: any = null;
+
+	@observable focusType: FocusType = FocusType.none;
 
 
 	setResource(path: string, jsonData: any) {
@@ -24,13 +31,13 @@ export class EditorState {
 	 */
 	actionSelectItem(item: any) {
 		return (e) => {
-			this.itemSelected = item;
+			this.itemFocused = item;
 			preventBubbleUp(e);
 		};
 	}
 
 	cssClassForSelection(item: any) {
-		return this.itemSelected === item ? "selected" : "";
+		return "widget " + ( this.itemFocused === item ? "focused" : "" );
 	}
 
 }

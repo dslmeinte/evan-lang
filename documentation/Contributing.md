@@ -38,9 +38,14 @@ You need to have the following installed:
 * [Node.js](https://nodejs.org/en/): you need a moderately-recent version to be on the path - I'm currently on v4.2.2 for `node` and v2.14.7 of `npm`.
 * `mkdir` (for initialization) and `diff` (for testing) need to be on the path.
 
-To get things working under Linux (confirmed for: Debian, Ubuntu), where the Node.js executable is called `nodejs`, you could make a shell script called `node` that redirects to `nodejs` and is first on the path.
+To get things working under Linux (confirmed and specifically for: Debian, Ubuntu), visit [this page](https://github.com/nodesource/distributions).
 
 To get things working under Windows, you'll have to replace all `/` (at least in `package.json`) with `\\` - in spite of it being almost 2017 already...
+
+You might find things still not working under Windows (most likely) or Linux (less likely).
+I'm developing on Mac myself, so that should work.
+
+Thanks to Jos Warmer of OCL and OpenModeling fame for trying out under Linux and Windows!
 
 
 ### A map of the country side

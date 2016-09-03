@@ -10,18 +10,24 @@ export class ResourcesView extends React.Component<{}, {}> {
 
 	render() {
 		return (
-			<div>
-				<span>Click on any of the following resources to load it:</span>
-				<ul>
-					{Object.keys(resourcesState.resourcesAsMap()).map(path => <li key={path} onClick={this.loadResource(path)}>{path}</li>)}
-				</ul>
-				<span>{editorState.pathLoaded ? `File loaded: ${editorState.pathLoaded}` : "no file loaded"}</span>
+			<div className="resources-pane">
+				<span>Resource:&nbsp;</span>
+				<select
+					className="resource-selector"
+					ref="resourceSelector"
+					value={editorState.pathLoaded || "none"}
+					onChange={this.handleChange.bind(this)}
+				>
+					<option key="none" value="none" disabled="true">(none)</option>
+					{Object.keys(resourcesState.resourcesAsMap()).map(path => <option key={path} value={path}>{path}</option>)}
+				</select>
 			</div>
 		);
 	}
 
-	loadResource(path: string) {
-		return () => { editorState.setResource(path, resourcesState.resourceByPath(path)); };
+	handleChange(e) {
+		const path = (this.refs as any).resourceSelector.value;
+		editorState.setResource(path, resourcesState.resourceByPath(path));
 	}
 
 }

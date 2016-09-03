@@ -5,6 +5,7 @@ import * as ReactDOM from "react-dom";
 
 import {editorState} from "./editor/state";
 import {EditorView} from "./editor/view";
+import {EvaluationView} from "./evaluation-view";
 
 import {resourcesState} from "./resources/state";
 import {ResourcesView} from "./resources/view";
@@ -21,7 +22,9 @@ if (location.hash) {
 ReactDOM.render(
 	<div>
 		<ResourcesView />
+		<hr />
 		<EditorView />
+		<EvaluationView />
 	</div>,
 	document.getElementById("root")
 );

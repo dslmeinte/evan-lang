@@ -5,13 +5,14 @@ Done items are prepended with "&#10003;".
 
 * Extend visualizer with selecting and editing (and folding) capabilities:
 	* &#10003; Be able to select rendered components.
-	* Provide generic "add something" component.
+	* &#10003; Provide generic "add something" component.
 		(
 			For this, look at: [react-json](https://github.com/arqex/react-json).
 			Effectively, we need first to be able to edit (as) plain JSON.
 		)
+	* Have editor and evaluation panes next to each oterh.
 	* Provide edit mode for every component (JSON widgets first).
-	* Provide sensible edit icons.
+	* Provide sensible edit icons and some reflective info.
 	* Implement some logic to have widgets determine whether the visualization would fit in a `span` (1 line) or requires a `div`.
 * Introduce semantics types for:
 	* Defining an immutable value.

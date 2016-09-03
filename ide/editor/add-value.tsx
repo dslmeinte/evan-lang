@@ -4,6 +4,7 @@ import {observer} from "mobx-react";
 import * as React from "react";
 import {indexOf} from "lodash";
 
+import {editorState, FocusType} from "./state";
 import {preventBubbleUp} from "./util";
 import {createOfSType} from "../../shared/util";
 
@@ -27,13 +28,13 @@ export class AddValue extends React.Component<{ addCallback: (newValue: any) => 
 		].concat(sTypes.map(sType => <option value={sType} key={sType}>{sType}</option>));
 		if (!this.state.creating) {
 			return (
-				<div>
-					<button onClick={this.switchInAdd.bind(this)}>+ Add</button>
+				<div className="widget">
+					<button onClick={this.initiateAdd.bind(this)}>+ Add</button>
 				</div>
 			);
 		}
 		return (
-			<div>
+			<div className="widget focused">
 				<span>Type:&nbsp;</span>
 				<select onClick={preventBubbleUp} ref="typeSelector">
 					{options}
@@ -44,7 +45,14 @@ export class AddValue extends React.Component<{ addCallback: (newValue: any) => 
 		);
 	}
 
-	switchInAdd(e) {
+	initiateAdd(e) {
+		if (editorState.itemFocused) {
+			if (editorState.focusType === FocusType.editing) {
+				return;
+			}
+			editorState.focusType = FocusType.none;
+			editorState.itemFocused = this;
+		}
 		preventBubbleUp(e);
 		this.setState({ creating: true });
 	}
@@ -58,7 +66,7 @@ export class AddValue extends React.Component<{ addCallback: (newValue: any) => 
 		preventBubbleUp(e);
 		this.setState({ creating: false });
 		const newValue = (() => {
-			const type = (this.refs["typeSelector"] as any).value;
+			const type = (this.refs as any).typeSelector.value;
 			switch (type) {
 				case "json-array": return [];
 				case "json-object": return {};
