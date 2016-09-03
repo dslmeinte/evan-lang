@@ -3,23 +3,23 @@ import {observer} from "mobx-react";
 import * as React from "react";
 
 import {dispatch} from "../dispatcher";
-import {editorState} from "../state";
 
 import {AddValue} from "../add-value";
+import {BaseWidget} from "../base-widget";
 
 
 @observer
-export class JsonArray<T> extends React.Component<{ array: Array<T> | IObservableArray<T>; }, {}> {
+export class JsonArray<T> extends BaseWidget<{ array: Array<T> | IObservableArray<T>; }> {
 
 	render() {
 		const {array} = this.props;
 		return (
-			<div onClick={editorState.actionSelectItem(this)} className={editorState.cssClassForSelection(this)}>
+			<div onClick={this.handleClick.bind(this)} className={this.genericClassName()}>
 				<span>[</span>
-					<span className="indent" key="foo">
+					<div className="indent">
 						{array.map(item => dispatch(item, "" + array.indexOf(item)))}
 						<AddValue addCallback={this.addItem.bind(this)} />
-					</span>
+					</div>
 				<span>]</span>
 			</div>
 		);

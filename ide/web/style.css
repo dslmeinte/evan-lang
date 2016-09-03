@@ -1,6 +1,5 @@
 html, body {
-	margin: 1em;
-	font: 10pt normal Arial, Helvetica, sans-serif; 
+	font: 11pt normal Arial, Helvetica, sans-serif; 
 }
 
 .indent {
@@ -11,11 +10,48 @@ pre {
 	margin: 0em;
 }
 
-.selected {
-	background: yellow;
+.focused {
+	background: #fafa88;
+	border-radius: 3pt;
 }
 
 .comments {
-	color: lightgreen;
+	color: green;
+	font-weight: bold;
+	margin-top: 0.5mem;
+	margin-bottom: 0.5em;
+}
+
+
+.editor-pane {
+	width: 55%;
+	float: left;
+}
+
+.evaluation-pane {
+	margin-left: 1em;
+	width: 40%;
+	float: left;
+}
+
+
+.widget {
+	padding: 5px;
+}
+
+
+.json-nothing, .json-boolean {
+	color: purple;
+	font-style: italic;
+	font-weight: bold;
+}
+
+.json-string {
+	color: darkred;
+}
+
+.json-number {
+	color: darkblue;
+	font-style: italic;
 }
 
