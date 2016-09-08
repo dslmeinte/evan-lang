@@ -30,7 +30,7 @@ export function makeMapper(action: string, polyMap: PolyMap): Interpreter {
 			forEachProperty(json, (name, value) => { result[name] = mapInternal(value, context); });
 			return result;
 		}
-		return json;
+		return json;	// TODO  find out: why undefined -> null?
 	}
 
 	return mapInternal;

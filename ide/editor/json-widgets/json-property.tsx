@@ -3,17 +3,22 @@ import * as React from "react";
 
 import {dispatch} from "../dispatcher";
 
-import {BaseWidget} from "../base-widget";
+import {FocusWidget} from "../base-widgets";
+import {IWithAccessor} from "../utils/accessor";
 
+
+interface IWithAccessorAndName<T> extends IWithAccessor<T> {
+	name: string;
+}
 
 @observer
-export class JsonProperty<T> extends BaseWidget<{ name: string; value: T; }> {
+export class JsonProperty<T> extends FocusWidget<IWithAccessorAndName<T>> {
 
 	render() {
-		const {name, value} = this.props;
+		const {name, accessor} = this.props;
 		return (
-			<div onClick={this.handleClick.bind(this)} className={this.genericClassName()}>
-				<span>{name}</span> <span>:</span> {dispatch(value)}
+			<div onClick={this.handleFocusClick.bind(this)} className={this.genericClassName()}>
+				<span>{name}</span> <span>:</span> {dispatch(accessor)}
 			</div>
 		);
 	}

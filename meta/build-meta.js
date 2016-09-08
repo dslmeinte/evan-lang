@@ -7,7 +7,7 @@ const encodingOpts = { encoding: "utf8" };
 
 const metaModel = JSON.parse(fs.readFileSync(__dirname + "/meta-model.json", encodingOpts));
 
-// TODO  check meta model
+// TODO  check meta model, e.g. using JSON Schema?
 
 writeLines(generateSemanticsTypes(metaModel), "shared/semantics-types_gen.ts");
 writeLines(generatePolymorphicDispatcher(metaModel), "ide/editor/polymorphic-dispatcher_gen.tsx");
@@ -19,11 +19,6 @@ mapMap(metaModel, function (typeName) {
 function generateSemanticsTypes(metaModel) {
 
 	function generateTsProperty(propertyName, description) {
-		// skip everything which has an "$sType" such as comments:
-		if (!!description.$sType) {
-			return [];
-		}
-
 		const tsType = !! description.ownType
 			? interfaceTypeName(description.type)
 			: description.type;
@@ -33,10 +28,10 @@ function generateSemanticsTypes(metaModel) {
 		return [ "\t" + propertyName + (description.optional ? "?" : "") + ": " + tsCompoundType + ";" ];
 	}
 
-	function generateTsInterface(typeName, propertiesMap) {
+	function generateTsInterface(typeName, metaTypeDescription) {
 		return [
 			"export interface " + interfaceTypeName(typeName) + " extends ISemanticsTyped {"
-		].concat(mapMap(propertiesMap, generateTsProperty))
+		].concat(mapMap(metaTypeDescription.properties, generateTsProperty))	
 		.concat([
 			"}",
 			""

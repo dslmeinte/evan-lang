@@ -1,23 +1,23 @@
-import {IObservableArray} from "mobx";
 import {observer} from "mobx-react";
 import * as React from "react";
 
 import {dispatch} from "../dispatcher";
+import {MyArray, makeArrayAccessor} from "../utils/accessor";
 
 import {AddValue} from "../add-value";
-import {BaseWidget} from "../base-widget";
+import {BaseEditWidget} from "../base-widgets";
 
 
 @observer
-export class JsonArray<T> extends BaseWidget<{ array: Array<T> | IObservableArray<T>; }> {
+export class JsonArray<T> extends BaseEditWidget<MyArray<T>> {
 
 	render() {
-		const {array} = this.props;
+		const array = this.props.accessor.value;
 		return (
-			<div onClick={this.handleClick.bind(this)} className={this.genericClassName()}>
+			<div onClick={this.handleFocusClick.bind(this)} className={this.genericClassName()}>
 				<span>[</span>
 					<div className="indent">
-						{array.map(item => dispatch(item, "" + array.indexOf(item)))}
+						{array.map((item, index) => dispatch(makeArrayAccessor(array, index), "" + array.indexOf(item)))}
 						<AddValue addCallback={this.addItem.bind(this)} />
 					</div>
 				<span>]</span>
@@ -26,7 +26,7 @@ export class JsonArray<T> extends BaseWidget<{ array: Array<T> | IObservableArra
 	}
 
 	addItem(newValue: any) {
-		this.props.array.push(newValue);
+		this.props.accessor.value.push(newValue);
 	}
 
 }

@@ -13,7 +13,7 @@ export class EditorView extends React.Component<{}, {}> {
 		return jsonData === null ? null : (
 			<div className="editor-pane">
 				<span>Program:</span>
-				{dispatch(jsonData)}
+				{dispatch({ value: jsonData, set: newValue => { editorState.jsonData = newValue; } }, null)}
 			</div>
 		);
 	}

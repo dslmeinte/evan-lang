@@ -1,6 +1,7 @@
 import {observer} from "mobx-react";
 import * as React from "react";
 
+import {makePropertyAccessor} from "../utils/accessor";
 import {dispatch} from "../dispatcher";
 import {editorState} from "../state";
 import {IFunctionApplication} from "../../../shared/semantics-types_gen";
@@ -14,10 +15,11 @@ export class FunctionApplication<T> extends React.Component<{ functionApplicatio
 		const {functionApplication} = this.props;
 		return (
 			<div onClick={editorState.actionSelectItem(this)} className={editorState.cssClassForSelection(this)}>
-				{dispatch(functionApplication.function)}<span>(</span>
+				{dispatch(makePropertyAccessor(functionApplication, "function"))}<span>(</span>
 					{mapMap(functionApplication.arguments, (argName, value) => (
 						<div className="indent" key={argName}>
-							<span>{argName}</span><span>&larr;</span>{dispatch(value)}
+							<span>{argName}</span><span>&larr;</span>
+							{dispatch(makePropertyAccessor(functionApplication.arguments, argName))}
 						</div>
 					))}
 				<span>)</span>

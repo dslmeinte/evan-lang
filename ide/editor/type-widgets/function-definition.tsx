@@ -1,6 +1,7 @@
 import {observer} from "mobx-react";
 import * as React from "react";
 
+import {makePropertyAccessor} from "../utils/accessor";
 import {dispatch} from "../dispatcher";
 import {editorState} from "../state";
 import {IFunctionDefinition} from "../../../shared/semantics-types_gen";
@@ -23,7 +24,7 @@ export class FunctionDefinition<T> extends React.Component<{ functionDefinition:
 				<span>)</span>{functionDefinition.returnType ? <span>: {functionDefinition.returnType}</span> : null}
 				<span> {"{"}</span>
 				<div className="indent">
-					{dispatch(functionDefinition.body)}
+					{dispatch(makePropertyAccessor(functionDefinition, "body"))}
 				</div>
 				<span>{"}"}</span>
 			</div>

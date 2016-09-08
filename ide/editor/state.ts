@@ -1,6 +1,6 @@
 import {observable} from "mobx";
 
-import {preventBubbleUp} from "./util";
+import {preventBubbleUp} from "./utils/ui-util";
 
 
 export enum FocusType {

@@ -5,7 +5,7 @@ import * as React from "react";
 import {indexOf} from "lodash";
 
 import {editorState, FocusType} from "./state";
-import {preventBubbleUp} from "./util";
+import {preventBubbleUp} from "./utils/ui-util";
 import {createOfSType} from "../../shared/util";
 
 const metaModel = require("../../meta/meta-model.json");

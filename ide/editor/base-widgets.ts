@@ -1,16 +1,17 @@
 import * as React from "react";
 
+import {IWithAccessor} from "./utils/accessor";
 import {editorState, FocusType} from "./state";
-import {preventBubbleUp} from "./util";
+import {preventBubbleUp} from "./utils/ui-util";
 
 
-export abstract class BaseWidget<T> extends React.Component<T, {}> {
+export abstract class FocusWidget<T> extends React.Component<T, void> {
 
 	/**
 	 * @return an action that selects the given item.
 	 * Intended to be used in React onClick defs as 'editorState.actionSelectItem(this)'.
 	 */
-	handleClick(e) {
+	handleFocusClick(e) {
 		if (editorState.itemFocused === this) {
 			editorState.focusType = FocusType.editing;
 		} else if (editorState.itemFocused !== FocusType.editing) {
@@ -24,4 +25,19 @@ export abstract class BaseWidget<T> extends React.Component<T, {}> {
 		return "widget " + ( editorState.itemFocused === this ? "focused" : "" );
 	}
 
+	isBeingEdited() {
+		return editorState.itemFocused === this && editorState.focusType === FocusType.editing;
+	}
+
+	exitEdit() {
+		if (editorState.itemFocused === this) {
+			editorState.itemFocused = FocusType.selected;
+		}
+	}
+
 }
+
+
+export abstract class BaseEditWidget<T> extends FocusWidget<IWithAccessor<T>> {
+}
+
