@@ -18,7 +18,7 @@ export class ResourcesView extends React.Component<{}, {}> {
 					value={editorState.pathLoaded || "none"}
 					onChange={this.handleChange.bind(this)}
 				>
-					<option key="none" value="none" disabled="true">(none)</option>
+					<option key="none" value="none" disabled={true}>(none)</option>
 					{Object.keys(resourcesState.resourcesAsMap()).map(path => <option key={path} value={path}>{path}</option>)}
 				</select>
 			</div>

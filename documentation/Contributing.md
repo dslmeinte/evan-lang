@@ -15,7 +15,7 @@ First of all, have a look at the [TODOs](./TODO.md): it's mostly for my own sake
 On higher level, Evan *needs* love in the following departments, and in the following order:
 
 1. *Editing behavior of the type widgets.* An editor with which you can't edit, is not...
-	(Currently, you can only select stuff.)
+	(Currently, you can only select stuff and edit it to a very limited extent.)
 1. *Better styling.* Both the chrome ("What chrome?!" "*That* chrome!") and the visualization of the widgets are quite..."fugly"...
 
 Things that will happen anyway, are fun to, and tick all other boxes that programmers and compiler engineers of all ilks flock to:
@@ -52,6 +52,7 @@ Thanks to Jos Warmer of OCL and OpenModeling fame for trying out under Linux and
 
 AKA: You'll find the following in this repository:
 
+* `core/`: all code shared across IDE, testing code, etc.
 * `data/`: contains example programs and other JSON resources.
 * `dist/` (after building): contains JavaScript compiled from TypeScript.
 * `documentation/`: you really have to ask?!
@@ -59,7 +60,6 @@ AKA: You'll find the following in this repository:
 	The simple Node.js `http-server` takes `ide/web/` as Web root.
 * `meta/`: the meta description of Evan (specifically of its semantic types) and simple JavaScript program to generate some TypeScript source files from that.
 * `node_modules/` (after installing): NPM's backyard.
-* `shared/`: all code shared across IDE, testing code, etc.
 * `test/`: testing code, including a CLI tool to invoke the evaluator on any JSON.
 * `typings/`: TypeScript typings sourced from DefinitelyTyped, but part of repo to avoid having to use TSD.
 * Special cameo appearance by: the usual top-level boilerplate suspects.
@@ -110,7 +110,7 @@ Evan's language constructs (which I call *semantics types*) are structurally des
 This description is *limited to structure* because that's the information that's fanned out and shared across various implementation aspects: evaluator, IDE.
 When executing `meta/build-meta.js`, the latter reads the description and generates various things:
 
-* `shared/semantics-types_gen.ts`: interfaces for each semantics type.
+* `core/semantics-types_gen.ts`: interfaces for each semantics type.
 * `ide/editor/polymorphic-dispatcher_gen.ts`: function that dispatches on the semantics type tag in the `$sType` property.
 	(We can do away with this with TypeScript 2.0 because of tagged unions.)
 * `ide/editor/type-widgets/*.tsx_gen`: skeleton implementation code for widgets for each semantics type.
@@ -118,7 +118,7 @@ When executing `meta/build-meta.js`, the latter reads the description and genera
 
 ### Evaluator
 
-The standalone evaluator that evaluates an Evan program is implemented through the `evaluate` function in `shared/evaluator.ts`.
+The standalone evaluator that evaluates an Evan program is implemented through the `evaluate` function in `core/evaluator.ts`.
 It's "standalone" in the sense that it's meant to be executed from a CLI as if the program where the whole universe.
 
 <small>

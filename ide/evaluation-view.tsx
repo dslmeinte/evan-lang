@@ -1,9 +1,9 @@
 import {observer} from "mobx-react";
 import * as React from "react";
 
-import {evaluate} from "../shared/evaluator";
+import {evaluate} from "../core/evaluator";
 import {editorState} from "./editor/state";
-import {prettyJson} from "../shared/util";
+import {prettyJson} from "../core/util";
 
 
 @observer

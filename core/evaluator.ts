@@ -2,11 +2,11 @@
 
 import {isBoolean, isString} from "lodash";
 
-import {IContext, cloneContext, emptyContext} from "../shared/context";
-import {makeIssue, isIssue} from "../shared/issues";
-import {makeMapper} from "../shared/mapper";
-import * as sTypes from "../shared/semantics-types_gen";
-import {isSemanticsTyped} from "../shared/util";
+import {IContext, cloneContext, emptyContext} from "../core/context";
+import {makeIssue, isIssue} from "../core/issues";
+import {makeMapper} from "../core/mapper";
+import * as sTypes from "../core/semantics-types_gen";
+import {isSemanticsTyped} from "../core/util";
 
 
 export function evaluate(json: any): any {
@@ -25,7 +25,7 @@ export function evaluate(json: any): any {
 	return evaluateInt(json, emptyContext);
 
 
-	function evaluateBinaryOperation(operation: sTypes.IBinaryOperation, context: IContext) {
+	function evaluateBinaryOperation(operation: sTypes.IBinaryOperation, context: IContext): any {
 		const leftEval = evaluateInt(operation.left, context);
 		const rightEval = evaluateInt(operation.right, context);
 		try {
@@ -40,7 +40,7 @@ export function evaluate(json: any): any {
 		// TODO  add a lot of checking
 	}
 
-	function evaluateFunctionApplication(call: sTypes.IFunctionApplication, context: IContext) {
+	function evaluateFunctionApplication(call: sTypes.IFunctionApplication, context: IContext): any {
 		const definition = evaluateInt(call.function, context);
 		if (definition === undefined || !isSemanticsTyped(definition) || definition.$sType !== "function definition") {
 			return makeIssue(`Function does not resolve to function definition`, definition);
@@ -54,14 +54,14 @@ export function evaluate(json: any): any {
 		return evaluateInt(definition.body, newContext);
 	}
 
-	function evaluateFunctionReference(call: sTypes.IFunctionReference, context: IContext): sTypes.IFunctionReference | sTypes.IIssue | void {
+	function evaluateFunctionReference(call: sTypes.IFunctionReference, context: IContext): sTypes.IFunctionDefinition | sTypes.IIssue | void {
 		if (!call.name || !isString(call.name)) {
 			return makeIssue(`Function reference has no name.`, call);
 		}
 		return context.functionDefinitions[call.name];
 	}
 
-	function evaluateFunctionDefinition(definition: sTypes.IFunctionDefinition, context: IContext) {
+	function evaluateFunctionDefinition(definition: sTypes.IFunctionDefinition, context: IContext): sTypes.IIssue | void {
 		const name = definition.name;
 		if (!name || !isString(name)) {
 			return makeIssue(`Function definition lacks string-valued name field.`, definition);
@@ -71,7 +71,7 @@ export function evaluate(json: any): any {
 		return undefined;
 	}
 
-	function evaluateIfThenElse(ifThenElse: sTypes.IIfThenElse, context: IContext) {
+	function evaluateIfThenElse(ifThenElse: sTypes.IIfThenElse, context: IContext): any {
 		if (!ifThenElse.condition || !ifThenElse.trueBranch || !ifThenElse.falseBranch) {
 			return makeIssue(`If-then-else object not complete.`, ifThenElse);
 		}
@@ -87,7 +87,7 @@ export function evaluate(json: any): any {
 		}
 	}
 
-	function evaluateValueReference(valueRef: sTypes.IValueReference, context: IContext) {
+	function evaluateValueReference(valueRef: sTypes.IValueReference, context: IContext): any {
 		const name = valueRef.name;
 		return name && isString(name) && (name in context.letValues)
 			? context.letValues[name]

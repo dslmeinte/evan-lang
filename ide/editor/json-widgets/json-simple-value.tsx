@@ -23,13 +23,13 @@ export class JsonSimpleValue extends BaseEditWidget<SimpleValue> {
 
 	private renderValueEdit() {
 		const value = this.props.accessor.value;
-		const {type} = toInfo(value);
+		const {type, displayText} = toInfo(value);
 		return (
 			<span>
-				{type === SimpleType.string ? <input type="text" value={value} onChange={this.onChange.bind(this)} ref="valueInput" /> : null}
-				{type === SimpleType.number ? <input type="number" value={value} onChange={this.onChange.bind(this)} ref="valueInput" /> : null}
+				{type === SimpleType.string ? <input type="text" value={displayText} onChange={this.onChange.bind(this)} ref="valueInput" /> : null}
+				{type === SimpleType.number ? <input type="number" value={displayText} onChange={this.onChange.bind(this)} ref="valueInput" /> : null}
 				{type === SimpleType.boolean
-					? <input type="checkbox" checked={!!value ? "checked" : ""} onChange={this.onChangeBoolean.bind(this)} ref="booleanInput" />
+					? <input type="checkbox" checked={!!value} onChange={this.onChangeBoolean.bind(this)} ref="booleanInput" />
 					: null
 				}
 				{type === SimpleType.nothing ? (

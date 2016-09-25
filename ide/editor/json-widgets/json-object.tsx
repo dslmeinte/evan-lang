@@ -1,7 +1,7 @@
 import {observer} from "mobx-react";
 import * as React from "react";
 
-import {forEachProperty} from "../../../shared/util";
+import {forEachProperty} from "../../../core/util";
 import {JsonProperty} from "./json-property";
 
 import {makePropertyAccessor} from "../utils/accessor";

@@ -4,8 +4,8 @@ import * as React from "react";
 import {makePropertyAccessor} from "../utils/accessor";
 import {dispatch} from "../dispatcher";
 import {editorState} from "../state";
-import {IFunctionDefinition} from "../../../shared/semantics-types_gen";
-import {mapMap} from "../../../shared/util";
+import {IFunctionDefinition} from "../../../core/semantics-types_gen";
+import {mapMap} from "../../../core/util";
 
 
 @observer

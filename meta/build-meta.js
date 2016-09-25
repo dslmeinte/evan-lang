@@ -9,7 +9,7 @@ const metaModel = JSON.parse(fs.readFileSync(__dirname + "/meta-model.json", enc
 
 // TODO  check meta model, e.g. using JSON Schema?
 
-writeLines(generateSemanticsTypes(metaModel), "shared/semantics-types_gen.ts");
+writeLines(generateSemanticsTypes(metaModel), "core/semantics-types_gen.ts");
 writeLines(generatePolymorphicDispatcher(metaModel), "ide/editor/polymorphic-dispatcher_gen.tsx");
 mapMap(metaModel, function (typeName) {
 	writeLines(generateTypeWidgetSkeleton(typeName), "ide/editor/type-widgets/" + fileName(typeName) + ".tsx_gen");
@@ -30,7 +30,8 @@ function generateSemanticsTypes(metaModel) {
 
 	function generateTsInterface(typeName, metaTypeDescription) {
 		return [
-			"export interface " + interfaceTypeName(typeName) + " extends ISemanticsTyped {"
+			"export interface " + interfaceTypeName(typeName) + " extends ISemanticsTyped {",
+			"\t$sType: \"" + typeName + "\";"
 		].concat(mapMap(metaTypeDescription.properties, generateTsProperty))	
 		.concat([
 			"}",
@@ -77,7 +78,7 @@ function generateTypeWidgetSkeleton(typeName) {
 		"",
 		"import {dispatch} from \"../dispatcher\";",
 		"import {editorState} from \"../state\";",
-		"import {IFunctionApplication} from \"../../../shared/semantics-types_gen\";",
+		"import {IFunctionApplication} from \"../../../core/semantics-types_gen\";",
 		"",
 		"",
 		"@observer",

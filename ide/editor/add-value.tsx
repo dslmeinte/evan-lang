@@ -6,7 +6,7 @@ import {indexOf} from "lodash";
 
 import {editorState, FocusType} from "./state";
 import {preventBubbleUp} from "./utils/ui-util";
-import {createOfSType} from "../../shared/util";
+import {createOfSType} from "../../core/util";
 
 const metaModel = require("../../meta/meta-model.json");
 const sTypes = Object.keys(metaModel);

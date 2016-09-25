@@ -10,14 +10,18 @@ Done items are prepended with "&#10003;".
 			For this, look at: [react-json](https://github.com/arqex/react-json).
 			Effectively, we need first to be able to edit (as) plain JSON.
 		)
-	* Have editor and evaluation panes next to each oterh.
-	* Provide edit mode for every component (JSON widgets first).
+	* &#10003; Have editor and evaluation panes next to each other.
+	* &#10003; Provide edit mode for every component (JSON widgets first).
 	* Provide sensible edit icons and some reflective info.
+		1. Deletion.
+		2. Change type (includes verbosity of current type).
+	* Improve styling, e.g. using [Pure CSS](http://purecss.io/) and/or [rework](https://github.com/reworkcss/rework).
 	* Implement some logic to have widgets determine whether the visualization would fit in a `span` (1 line) or requires a `div`.
+	* Fix bug w.r.t. boolean and void literals not view-updating while being edited.
 * Introduce semantics types for:
 	* Defining an immutable value.
-	* Defining a mutable value - *if we want to allow that*.
-	* Aggregating JSON contents from resource.
+	* Defining a mutable value.
+	* Aggregating JSON contents from resource (as mutable value).
 	* Changing some aggregated JSON in some way (e.g. using a JSON Patch-like expression) - for using in an action.
 	* Indicating that some stuff is to be rendered as HTML/React component.
 	* Defining types *and interpreters on them*.
@@ -37,6 +41,9 @@ Done items are prepended with "&#10003;".
 	* &#10003; Don't use `nscript` (whose installation is kinda heavy) unless actually convenient.
 	* &#10003; Replace various CLI dependencies with `npm`-able, OS-independent alternatives: `rimraf`.
 		Can we also replace `mkdir -p` and `diff` with NPM alternatives?
+	* &#10003; Upgrade to TypeScript 2.0.x and make use of tagged unions for `ISemanticsTyped.$sType`.
+	* Make use of a DI'able class for the meta model, so we're relying less on absolute paths.
+	* Replace use of `core/mapper.ts` with use of explicit `switch` and TS 2.0 tagged unions
+		- do this only after running an Evan in a React environment is becoming clear.
 * Implement watching (&#10003;) or even hot reload - see e.g. [this GitHub repo](https://github.com/milankinen/livereactload).
-* Update to TypeScript 2.0 and make use of tagged unions for `ISemanticsTyped.$sType`.
 

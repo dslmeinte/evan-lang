@@ -4,7 +4,7 @@ import * as React from "react";
 import {makePropertyAccessor} from "../utils/accessor";
 import {dispatch} from "../dispatcher";
 import {editorState} from "../state";
-import {IBinaryOperation} from "../../../shared/semantics-types_gen";
+import {IBinaryOperation} from "../../../core/semantics-types_gen";
 
 
 @observer

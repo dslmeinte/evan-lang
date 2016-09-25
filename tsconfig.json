@@ -1,5 +1,5 @@
 {
-    "version": "1.8.10",
+    "version": "2.0.3",
     "compilerOptions": {
         "target": "es5",
         "module": "commonjs",
@@ -9,22 +9,8 @@
         "jsx": "react"
     },
     "filesGlob": [
-        "./evaluation/**/*.ts",
-        "./shared/**/*.ts",
+        "./core/**/*.ts",
         "./test/**/*.ts",
-        "./type-system/**/*.ts",
         "!./node_modules/**/*.ts"
-    ],
-    "files": [
-        "./shared/typings.d.ts",
-        "./shared/base-semantics-types.ts",
-        "./shared/context.ts",
-        "./shared/evaluator.ts",
-        "./shared/issues.ts",
-        "./shared/mapper.ts",
-        "./shared/semantics-types_gen.ts",
-        "./shared/util.ts",
-        "./test/cli.ts",
-        "./test/test-all.ts"
     ]
 }

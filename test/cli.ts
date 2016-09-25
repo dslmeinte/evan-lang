@@ -1,8 +1,8 @@
 import {readFileSync} from "fs";
 const process = require("process");
 
-import {evaluate} from "../shared/evaluator";
-import {prettyJson} from "../shared/util";
+import {evaluate} from "../core/evaluator";
+import {prettyJson} from "../core/util";
 
 
 function handle(json: any) {

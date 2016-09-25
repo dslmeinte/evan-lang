@@ -4,27 +4,28 @@
   "description": "A vaguely Lispy language in the context of JavaScript.",
   "scripts": {
     "postinstall": "mkdir -p test/actual",
-    "build": "tsc",
-    "prebuild": "npm run build-meta && tsconfig",
     "test": "node dist/test/test-all.js && diff --recursive test/actual/ test/expected/",
-    "pretest": "npm run build",
+    "pretest": "npm run build-core",
     "start": "http-server -p 8031 ide/web",
     "prestart": "npm run build-web",
+    "build-meta": "node meta/build-meta.js",
+    "build-core": "tsc",
+    "prebuild-core": "npm run build-meta",
     "build-web-only": "browserify ide/index.tsx -p [ tsify ] -o ide/web/bundle.js",
     "build-web": "npm run build-web-only",
-    "prebuild-web": "npm run build",
-    "build-meta": "node meta/build-meta.js",
+    "prebuild-web": "npm run build-core",
+	"build": "npm run build-web",
     "watch-web": "watchify ide/index.tsx -p [ tsify ] -o ide/web/bundle.js -v",
     "clean": "rimraf ide/editor/type-widgets/*.tsx_gen && rimraf test/actual && rimraf dist && rimraf node_modules"
   },
   "author": "Meinte Boersma",
   "license": "MIT",
   "dependencies": {
-    "lodash": "4.15.0",
-    "mobx": "2.3.5",
-    "mobx-react": "3.5.0",
-    "react": "15.2.1",
-    "react-dom": "15.2.1"
+    "lodash": "^4.16.1",
+    "mobx": "^2.5.1",
+    "mobx-react": "^3.5.6",
+    "react": "^15.3.2",
+    "react-dom": "^15.3.2"
   },
   "devDependencies": {
     "browserify": "^13.1.0",
@@ -32,9 +33,8 @@
     "http-server": "^0.9.0",
     "path": "^0.12.7",
     "rimraf": "^2.5.4",
-    "tsconfig-glob": "^0.4.3",
-    "tsify": "^1.0.4",
-    "typescript": "^1.8.10",
+    "tsify": "^1.0.7",
+    "typescript": "^2.0.3",
     "watchify": "^3.7.0"
   }
 }

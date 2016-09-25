@@ -6,12 +6,12 @@ import {JsonObject} from "./json-widgets/json-object";
 import {JsonSimpleValue} from "./json-widgets/json-simple-value";
 import {IAccessor} from "./utils/accessor";
 import {polyDispatch} from "./polymorphic-dispatcher_gen";
-import {isArray, isSemanticsTyped, prettyJson, sType} from "../../shared/util";
+import {isMyArray, isSemanticsTyped, prettyJson, sType} from "../../core/util";
 
 
 export function dispatch(accessor: IAccessor<any>, key?: string) {
 	const json: any = accessor.value;
-	if (isArray(json)) {
+	if (isMyArray(json)) {
 		return <JsonArray accessor={accessor} key={key} />;
 	}
 	if (isObject(json)) {

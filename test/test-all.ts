@@ -1,8 +1,8 @@
 import {readdirSync, readFileSync, writeFileSync} from "fs";
 import {join} from "path";
 
-import {evaluate} from "../shared/evaluator";
-import {prettyJson} from "../shared/util";
+import {evaluate} from "../core/evaluator";
+import {prettyJson} from "../core/util";
 
 
 const rootprefix = join(__dirname, "../..");

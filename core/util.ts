@@ -23,7 +23,7 @@ export function createOfSType(sType: string) {
 }
 
 
-export function isArray(json: any) {
+export function isMyArray(json: any) {
 	return isArray(json) || isObservableArray(json);
 }
 

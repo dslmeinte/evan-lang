@@ -1,14 +1,11 @@
 import {isObject} from "lodash";
 
-import {IIssue} from "../shared/semantics-types_gen";
+import {IIssue} from "../core/semantics-types_gen";
 
-
-
-const sType = "issue";
 
 export function makeIssue(message: string, object?: Object): IIssue {
-	const issue = {
-		$sType: sType,
+	const issue: IIssue = {
+		"$sType": "issue",
 		"message": message
 	};
 	if (object) {
@@ -18,6 +15,6 @@ export function makeIssue(message: string, object?: Object): IIssue {
 }
 
 export function isIssue(object: any) {
-	return isObject(object) && object.$sType === sType;
+	return isObject(object) && object.$sType === "issue";
 }
 
