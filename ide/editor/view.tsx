@@ -10,10 +10,17 @@ export class EditorView extends React.Component<{}, {}> {
 
 	render() {
 		const {jsonData} = editorState;
-		return jsonData === null ? null : (
+		return (
 			<div className="editor-pane">
 				<span>Program:</span>
-				{dispatch({ value: jsonData, set: newValue => { editorState.jsonData = newValue; } }, null)}
+				{dispatch(
+					{
+						value: jsonData,
+						set: newValue => { editorState.jsonData = newValue; },
+						"delete": () => { /* do nothing */ }
+					},
+					undefined
+				)}
 			</div>
 		);
 	}

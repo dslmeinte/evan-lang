@@ -25,7 +25,7 @@ export class ResourcesView extends React.Component<{}, {}> {
 		);
 	}
 
-	handleChange(e) {
+	handleChange() {
 		const path = (this.refs as any).resourceSelector.value;
 		editorState.setResource(path, resourcesState.resourceByPath(path));
 	}

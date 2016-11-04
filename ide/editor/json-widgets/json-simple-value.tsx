@@ -1,32 +1,27 @@
 import {observer} from "mobx-react";
 import * as React from "react";
 
-import {BaseEditWidget} from "../base-widgets";
-import {SimpleValue, SimpleType, toInfo, coerce, fromString} from "../utils/simple-value-util";
+import {BaseEditWidget} from "../base-edit-widget";
+import {SimpleValue, SimpleType, toInfo, coerce, fromString, nothing} from "../utils/simple-value-util";
 
 
 @observer
 export class JsonSimpleValue extends BaseEditWidget<SimpleValue> {
 
-	render() {
-		return (
-			<div onClick={this.handleFocusClick.bind(this)} className={this.genericClassName()}>
-				{this.isBeingEdited() ? this.renderValueEdit() : this.renderValue()}
-			</div>
-		);
+	renderContents(value: SimpleValue) {
+		return this.isBeingEdited() ? this.renderValueEdit(value) : this.renderValue(value);
 	}
 
-	private renderValue() {
-		const {type, displayText} = toInfo(this.props.accessor.value);
+	private renderValue(value: SimpleValue) {
+		const {type, displayText} = toInfo(value);
 		return <span className={"json-" + SimpleType[type]}>{displayText}</span>;
 	}
 
-	private renderValueEdit() {
-		const value = this.props.accessor.value;
+	private renderValueEdit(value: SimpleValue) {
 		const {type, displayText} = toInfo(value);
 		return (
 			<span>
-				{type === SimpleType.string ? <input type="text" value={displayText} onChange={this.onChange.bind(this)} ref="valueInput" /> : null}
+				{type === SimpleType.string ? <input type="text" value={"" + value} onChange={this.onChange.bind(this)} ref="valueInput" /> : null}
 				{type === SimpleType.number ? <input type="number" value={displayText} onChange={this.onChange.bind(this)} ref="valueInput" /> : null}
 				{type === SimpleType.boolean
 					? <input type="checkbox" checked={!!value} onChange={this.onChangeBoolean.bind(this)} ref="booleanInput" />
@@ -52,12 +47,12 @@ export class JsonSimpleValue extends BaseEditWidget<SimpleValue> {
 		);
 	}
 
-	private doCoerce(): SimpleValue {
+	private doCoerce() {
 		const dstTypeIndex = (this.refs as any).coerceTypeSelector.value as string;
 		this.props.accessor.set(coerce(this.props.accessor.value, SimpleType[dstTypeIndex]));
 	}
 
-	private mkNothingRadio(targetValue: void, currentValue: void) {
+	private mkNothingRadio(targetValue: nothing, currentValue: nothing) {
 		const asText = targetValue === undefined ? "undefined" : "null";
 		return (
 			<span key={"input-" + asText}>

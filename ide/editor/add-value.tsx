@@ -6,10 +6,9 @@ import {indexOf} from "lodash";
 
 import {editorState, FocusType} from "./state";
 import {preventBubbleUp} from "./utils/ui-util";
-import {createOfSType} from "../../core/util";
 
-const metaModel = require("../../meta/meta-model.json");
-const sTypes = Object.keys(metaModel);
+import {default as metaModelInstance} from "../../meta/meta-model";
+const sTypes = metaModelInstance.sTypes();
 
 
 @observer
@@ -45,7 +44,7 @@ export class AddValue extends React.Component<{ addCallback: (newValue: any) => 
 		);
 	}
 
-	initiateAdd(e) {
+	initiateAdd(e: React.SyntheticEvent) {
 		if (editorState.itemFocused) {
 			if (editorState.focusType === FocusType.editing) {
 				return;
@@ -57,12 +56,12 @@ export class AddValue extends React.Component<{ addCallback: (newValue: any) => 
 		this.setState({ creating: true });
 	}
 
-	cancelCreate(e) {
+	cancelCreate(e: React.SyntheticEvent) {
 		preventBubbleUp(e);
 		this.setState({ creating: false });
 	}
 
-	createInstance(e) {
+	createInstance(e: React.SyntheticEvent) {
 		preventBubbleUp(e);
 		this.setState({ creating: false });
 		const newValue = (() => {
@@ -75,7 +74,7 @@ export class AddValue extends React.Component<{ addCallback: (newValue: any) => 
 					if (indexOf(sTypes, type) < 0) {
 						throw new Error(`Cannot create instance of: ${type}`);
 					}
-					return createOfSType(type);
+					return metaModelInstance.createOfSType(type);
 				}
 			}
 		})();

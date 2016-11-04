@@ -6,7 +6,7 @@ import {IContext, cloneContext, emptyContext} from "../core/context";
 import {makeIssue, isIssue} from "../core/issues";
 import {makeMapper} from "../core/mapper";
 import * as sTypes from "../core/semantics-types_gen";
-import {isSemanticsTyped} from "../core/util";
+import {isSemanticsTyped} from "../meta/meta-model";
 
 
 export function evaluate(json: any): any {

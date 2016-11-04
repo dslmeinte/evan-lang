@@ -2,24 +2,24 @@ import {observer} from "mobx-react";
 import * as React from "react";
 
 import {dispatch} from "../dispatcher";
-import {MyArray, makeArrayAccessor} from "../utils/accessor";
+import {ArrayLike} from "../../../core/util";
+import {makeArrayAccessor} from "../utils/accessor";
 
 import {AddValue} from "../add-value";
-import {BaseEditWidget} from "../base-widgets";
+import {BaseEditWidget} from "../base-edit-widget";
 
 
 @observer
-export class JsonArray<T> extends BaseEditWidget<MyArray<T>> {
+export class JsonArray<T> extends BaseEditWidget<ArrayLike<T>> {
 
-	render() {
-		const array = this.props.accessor.value;
+	renderContents(array: ArrayLike<T>) {
 		return (
-			<div onClick={this.handleFocusClick.bind(this)} className={this.genericClassName()}>
+			<div>
 				<span>[</span>
-					<div className="indent">
-						{array.map((item, index) => dispatch(makeArrayAccessor(array, index), "" + array.indexOf(item)))}
-						<AddValue addCallback={this.addItem.bind(this)} />
-					</div>
+				<div className="indent">
+					{array.map((item, index) => dispatch(makeArrayAccessor(array, index), "" + array.indexOf(item)))}
+					<AddValue addCallback={this.addItem.bind(this)} />
+				</div>
 				<span>]</span>
 			</div>
 		);

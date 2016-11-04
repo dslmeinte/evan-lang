@@ -13,11 +13,11 @@ Done items are prepended with "&#10003;".
 	* &#10003; Have editor and evaluation panes next to each other.
 	* &#10003; Provide edit mode for every component (JSON widgets first).
 	* Provide sensible edit icons and some reflective info.
-		1. Deletion.
+		1. &#10003; Deletion.
 		2. Change type (includes verbosity of current type).
+	* Fix bug w.r.t. boolean and void literals not view-updating while being edited.
 	* Improve styling, e.g. using [Pure CSS](http://purecss.io/) and/or [rework](https://github.com/reworkcss/rework).
 	* Implement some logic to have widgets determine whether the visualization would fit in a `span` (1 line) or requires a `div`.
-	* Fix bug w.r.t. boolean and void literals not view-updating while being edited.
 * Introduce semantics types for:
 	* Defining an immutable value.
 	* Defining a mutable value.
@@ -42,7 +42,7 @@ Done items are prepended with "&#10003;".
 	* &#10003; Replace various CLI dependencies with `npm`-able, OS-independent alternatives: `rimraf`.
 		Can we also replace `mkdir -p` and `diff` with NPM alternatives?
 	* &#10003; Upgrade to TypeScript 2.0.x and make use of tagged unions for `ISemanticsTyped.$sType`.
-	* Make use of a DI'able class for the meta model, so we're relying less on absolute paths.
+	* &#10003; Make use of a DI'able class for the meta model, so we're relying less on absolute paths.
 	* Replace use of `core/mapper.ts` with use of explicit `switch` and TS 2.0 tagged unions
 		- do this only after running an Evan in a React environment is becoming clear.
 * Implement watching (&#10003;) or even hot reload - see e.g. [this GitHub repo](https://github.com/milankinen/livereactload).

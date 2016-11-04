@@ -1,7 +1,9 @@
 import {isString, isNumber, isBoolean} from "lodash";
 
 
-export type SimpleValue = string | number | boolean | void;
+export type nothing = null | undefined;
+
+export type SimpleValue = string | number | boolean | nothing;
 
 export enum SimpleType {
 	string, number, boolean, nothing

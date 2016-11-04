@@ -1,20 +1,19 @@
 import {observer} from "mobx-react";
 import * as React from "react";
 
-import {editorState} from "../state";
+import {BaseEditWidget} from "../base-edit-widget";
+import {makePropertyAccessor} from "../utils/accessor";
 import {IIssue} from "../../../core/semantics-types_gen";
 
 
 @observer
-export class Issue<T> extends React.Component<{ issue: IIssue; }, {}> {
+export class Issue extends BaseEditWidget<IIssue> {
 
-	render() {
-		const {issue} = this.props;
+	renderContents(issue: IIssue) {
 		return (
-			<div onClick={editorState.actionSelectItem(this)} className={"issue " + editorState.cssClassForSelection(this)}>
+			<div>
 				<span>{issue.message}</span>
-				// TODO  object?
-				{issue.causedBy ? <Issue issue={issue.causedBy} /> : null}
+				{issue.causedBy ? <Issue accessor={makePropertyAccessor(issue, "causedBy")} /> : null}
 			</div>
 		);
 	}

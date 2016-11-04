@@ -1,4 +1,5 @@
 import {observable} from "mobx";
+import {SyntheticEvent} from "react";
 
 import {preventBubbleUp} from "./utils/ui-util";
 
@@ -10,7 +11,7 @@ export enum FocusType {
 
 export class EditorState {
 
-	@observable pathLoaded: string = null;
+	@observable pathLoaded: string | null = null;
 
 	@observable jsonData: any = null;
 
@@ -30,7 +31,7 @@ export class EditorState {
 	 * Intended to be used in React onClick defs as 'editorState.actionSelectItem(this)'.
 	 */
 	actionSelectItem(item: any) {
-		return (e) => {
+		return (e: SyntheticEvent) => {
 			this.itemFocused = item;
 			preventBubbleUp(e);
 		};

@@ -2,19 +2,18 @@ import {observer} from "mobx-react";
 import * as React from "react";
 
 import {makePropertyAccessor} from "../utils/accessor";
+import {BaseEditWidget} from "../base-edit-widget";
 import {dispatch} from "../dispatcher";
-import {editorState} from "../state";
 import {IFunctionDefinition} from "../../../core/semantics-types_gen";
 import {mapMap} from "../../../core/util";
 
 
 @observer
-export class FunctionDefinition<T> extends React.Component<{ functionDefinition: IFunctionDefinition; }, {}> {
+export class FunctionDefinition extends BaseEditWidget<IFunctionDefinition> {
 
-	render() {
-		const {functionDefinition} = this.props;
+	renderContents(functionDefinition: IFunctionDefinition) {
 		return (
-			<div onClick={editorState.actionSelectItem(this)} className={editorState.cssClassForSelection(this)}>
+			<div>
 				<span><b>define</b> </span><span><em>{functionDefinition.name}</em></span><span>(</span>
 					{mapMap(functionDefinition.parameters, (paramName, type) => (
 						<div className="indent" key={paramName}>

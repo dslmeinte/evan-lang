@@ -1,31 +1,28 @@
-import {isArray, isObject, isString} from "lodash";
-import {isObservableArray} from "mobx";
+import {isObject} from "lodash";
+import {IObservableArray, isArrayLike} from "mobx";
+
+import {ISemanticsTyped} from "../core/base-semantics-types";
+import {isSemanticsTyped} from "../meta/meta-model";
 
 
-const TYPE_KEY_NAME = "$sType";
+export type ArrayLike<T> = Array<T> | IObservableArray<T>;
 
-export function isSemanticsTyped(json: any) {
-	if (isObject(json)) {
-		const sTypeValue = json[TYPE_KEY_NAME];
-		return sTypeValue && isString(sTypeValue);
+export function type(json: any) {
+	if (isArrayLike(json)) {
+		return "json-array";
 	}
-	return false;
+
+	if (isObject(json)) {
+		if (isSemanticsTyped(json)) {
+			const object = json as ISemanticsTyped;
+			return object.$sType;
+		}
+		return "json-object";
+	}
+
+	return "json-simple-value";
 }
 
-export function sType(json: Object) {
-	return json[TYPE_KEY_NAME];
-}
-
-export function createOfSType(sType: string) {
-	return {
-		[TYPE_KEY_NAME]: sType
-	};
-}
-
-
-export function isMyArray(json: any) {
-	return isArray(json) || isObservableArray(json);
-}
 
 export function mapMap<V, R>(map: { [key: string]: V; }, func: (key: string, value: V) => R): R[] {
 	return Object.keys(map).map(key => func(key, map[key]));

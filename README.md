@@ -20,7 +20,7 @@ To get started:
 4. To run the tests for the evaluator, execute: `npm test`.
 5. To (re-)build the IDE (after having made changes), execute `npm build-web` and re-load it in the browser.
 	Hot reloading isn't implemented yet and meta-circularity of the IDE would actually make that circuitous.
-6. To run the standalone evaluator on arbitrary (but valid) JSON, execute: `npm run build`, `node dist/test/cli.js (<) data/fib.json`.
+6. To run the standalone evaluator on arbitrary (but valid) JSON, execute: `npm run build-core`, `node dist/test/cli.js (<) data/fib.json`.
 	You can input JSON either by specifying a path as last argument or by passing it to `stdin`.
 
 

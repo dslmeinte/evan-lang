@@ -1,4 +1,6 @@
-export function preventBubbleUp(e) {
+import {SyntheticEvent} from "react";
+
+export function preventBubbleUp(e: SyntheticEvent) {
 	e.stopPropagation();
 	e.preventDefault();
 }

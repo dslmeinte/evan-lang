@@ -74,7 +74,7 @@ After cloning the repo and before doing anything, execute:
 The following NPM commands can then be ran:
 
 * * `npm run build-meta`: builds some TypeScript source files (interfaces, widget implementation skeletons) from the definition of Evan in `meta/meta-model.json`.
-* `npm run build`: builds everything apart from the IDE code.
+* `npm run build-core`: builds everything apart from the IDE code.
 * `npm test`: runs `test/test-all.ts` that runs the evaluator (after having built it) on all files in `data/`, saves the results in `test/actual/` and compares these (using POSIX `diff`) with the ones in `test/expected/`.
 * `npm run build-web`: builds everything including the IDE code.
 * `npm start`: starts a Web server serving the IDE on [`localhost:8031`](http://localhost:8031) after building everything.

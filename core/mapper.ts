@@ -1,9 +1,11 @@
 import {isObject} from "lodash";
+import {isArrayLike} from "mobx";
 
 import {IContext} from "../core/context";
 import {makeIssue} from "../core/issues";
 import {ISemanticsTyped} from "../core/base-semantics-types";
-import {forEachProperty, isMyArray, isSemanticsTyped} from "../core/util";
+import {forEachProperty} from "../core/util";
+import {isSemanticsTyped} from "../meta/meta-model";
 
 
 export type PolyMap = { [sType: string]: (object: ISemanticsTyped, context: IContext) => any };
@@ -13,7 +15,7 @@ export type Interpreter = (json: any, context: IContext) => any;
 export function makeMapper(action: string, polyMap: PolyMap): Interpreter {
 
 	function mapInternal(json: any, context: IContext): any {
-		if (isMyArray(json)) {
+		if (isArrayLike(json)) {
 			return (json as any[]).map(item => mapInternal(item, context));
 		}
 		if (isObject(json)) {

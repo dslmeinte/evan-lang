@@ -52,6 +52,8 @@ function generateSemanticsTypes(metaModel) {
 function generatePolymorphicDispatcher(metaModel) {
 	return [
 		"import * as React from \"react\";",
+		"",
+		"import {IAccessor} from \"./utils/accessor\";",
 		""
 	].concat(mapMap(metaModel, function (typeName) {
 		return "import {" + classTypeName(typeName) + "} from \"./type-widgets/" + fileName(typeName) + "\";";
@@ -59,14 +61,15 @@ function generatePolymorphicDispatcher(metaModel) {
 	).concat([
 		"",
 		"",
-		"export function polyDispatch(sType: string, json: any, key?: string) {",
+		"export function polyDispatch(sType: string, accessor: IAccessor<any>, key?: string) {",
 		"\tswitch (sType) {"
 	]).concat(mapMap(metaModel, function (typeName) {
-		return "\t\tcase \"" + typeName + "\": return <" + classTypeName(typeName) + " " + attributeName(typeName) + "={json} key={key} />;";
+		return "\t\tcase \"" + typeName + "\": return <" + classTypeName(typeName) + " accessor={accessor} key={key} />;";
 	})).concat([
 		"\t\tdefault: return null;",
 		"\t}",
-		"}"
+		"}",
+		""
 	]);
 }
 
@@ -76,16 +79,18 @@ function generateTypeWidgetSkeleton(typeName) {
 		"import {observer} from \"mobx-react\";",
 		"import * as React from \"react\";",
 		"",
+		"import {BaseEditWidget} from \"../base-edit-widget\";",
 		"import {dispatch} from \"../dispatcher\";",
-		"import {editorState} from \"../state\";",
-		"import {IFunctionApplication} from \"../../../core/semantics-types_gen\";",
+		"import {" + interfaceTypeName(typeName) + "} from \"../../../core/semantics-types_gen\";",
 		"",
 		"",
 		"@observer",
-		"export class " + classTypeName(typeName) + "<T> extends React.Component<{ " + attributeName(typeName) + ": " + interfaceTypeName(typeName) + "; }, {}> {",
+		"export class " + classTypeName(typeName) + " extends BaseEditWidget<" + interfaceTypeName(typeName) + "> {",
 		"",
-		"\trender() {",
-		"\t\tconst {" + attributeName(typeName) + "} = this.props;",
+		"\trenderContents(" + attributeName(typeName) + ": " + interfaceTypeName(typeName) + ") {",
+		"\t\treturn (",
+		"\t\t\t// TODO  render code here!",
+		"\t\t);",
 		"\t}",
 		"",
 		"}"
@@ -109,7 +114,7 @@ function attributeName(typeName) {
 
 
 function fileName(typeName) {
-	return typeName.replace(" ", "-");
+	return typeName.replace(/[ ]/g, "-");
 }
 
 

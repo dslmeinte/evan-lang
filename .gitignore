@@ -6,3 +6,6 @@ test/actual/
 **/*.tsx_gen
 **/*_gen.ts*
 
+# Visual Studio Code:
+.vscode/
+

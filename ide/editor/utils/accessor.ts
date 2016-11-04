@@ -1,12 +1,19 @@
-import {IObservableArray, observable} from "mobx";
+import {observable} from "mobx";
+import {ArrayLike} from "../../../core/util";
 
 
-export type MyArray<T> = Array<T> | IObservableArray<T>;
-
-
+/**
+ * (Type parameter T is type of current/initial value, not after change.)
+ */
 export interface IAccessor<T> {
+
+	/** Value can not be type-changed. */
+	isUnswitchable?: boolean;
+
 	value: T;
 	set(newValue: T): void;
+	delete(): void;
+
 }
 
 
@@ -19,16 +26,18 @@ export function makePropertyAccessor(object: Object, propertyName: string): IAcc
 	const observableObject = observable(object);
 	return observable({
 		get value() { return observableObject[propertyName]; },
-		set: newValue => { observableObject[propertyName] = newValue; }
+		set: (newValue: any) => { observableObject[propertyName] = newValue; },
+		"delete": () => { delete observableObject[propertyName]; }
 	});
 }
 
 
-export function makeArrayAccessor<T>(array: MyArray<T>, index: number): IAccessor<any> {
+export function makeArrayAccessor<T>(array: ArrayLike<T>, index: number): IAccessor<any> {
 	const observableArray = observable(array);
 	return observable({
 		get value() { return observableArray[index]; },
-		set: newValue => { observableArray[index] = newValue; }
+		set: (newValue: any) => { observableArray[index] = newValue; },
+		"delete": () => { observableArray.splice(index, 1); }
 	});
 }
 

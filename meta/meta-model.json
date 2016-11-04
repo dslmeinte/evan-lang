@@ -64,12 +64,11 @@
 	"issue": {
 		"properties": {
 			"message": { "type": "string" },
-			"object": { "type": "Object", "optional": true },
 			"causedBy": { "type": "issue", "ownType": true, "optional": true }
 		},
 		"description": {
 			"$sType": "comments",
-			"text": "An issue caused by deeper evaluation. <object> can optionally contain the offending object causing the issue."
+			"text": "An issue, optionally caused by deeper evaluation."
 		}
 	},
 	"value reference": {

@@ -1,20 +1,15 @@
 import {observer} from "mobx-react";
 import * as React from "react";
 
-import {editorState} from "../state";
+import {BaseEditWidget} from "../base-edit-widget";
 import {IValueReference} from "../../../core/semantics-types_gen";
 
 
 @observer
-export class ValueReference<T> extends React.Component<{ valueReference: IValueReference; }, {}> {
+export class ValueReference extends BaseEditWidget<IValueReference> {
 
-	render() {
-		const {valueReference} = this.props;
-		return (
-			<span onClick={editorState.actionSelectItem(this)} className={editorState.cssClassForSelection(this)}>
-				<em>{valueReference.name}</em>
-			</span>
-		);
+	renderContents(valueReference: IValueReference) {
+		return (<span><em>{valueReference.name}</em></span>);
 	}
 
 }

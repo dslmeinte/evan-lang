@@ -2,18 +2,17 @@ import {observer} from "mobx-react";
 import * as React from "react";
 
 import {makePropertyAccessor} from "../utils/accessor";
+import {BaseEditWidget} from "../base-edit-widget";
 import {dispatch} from "../dispatcher";
-import {editorState} from "../state";
 import {IIfThenElse} from "../../../core/semantics-types_gen";
 
 
 @observer
-export class IfThenElse<T> extends React.Component<{ ifThenElse: IIfThenElse; }, {}> {
+export class IfThenElse extends BaseEditWidget<IIfThenElse> {
 
-	render() {
-		const {ifThenElse} = this.props;
+	renderContents(ifThenElse: IIfThenElse) {
 		return (
-			<div onClick={editorState.actionSelectItem(this)} className={editorState.cssClassForSelection(this)}>
+			<div>
 				<span><b>if</b>: </span><div className="indent">
 					{dispatch(makePropertyAccessor(ifThenElse, "condition"))}</div>
 				<span><b>then</b>: </span><div className="indent">

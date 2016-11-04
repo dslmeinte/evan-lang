@@ -1,19 +1,18 @@
 import {observer} from "mobx-react";
 import * as React from "react";
 
+import {BaseEditWidget} from "../base-edit-widget";
 import {makePropertyAccessor} from "../utils/accessor";
 import {dispatch} from "../dispatcher";
-import {editorState} from "../state";
 import {IBinaryOperation} from "../../../core/semantics-types_gen";
 
 
 @observer
-export class BinaryOperation<T> extends React.Component<{ binaryOperation: IBinaryOperation; }, {}> {
+export class BinaryOperation extends BaseEditWidget<IBinaryOperation> {
 
-	render() {
-		const {binaryOperation} = this.props;
+	renderContents(binaryOperation: IBinaryOperation) {
 		return (
-			<div onClick={editorState.actionSelectItem(this)} className={editorState.cssClassForSelection(this)}>
+			<div>
 				{dispatch(makePropertyAccessor(binaryOperation, "left"))}
 				<span>{binaryOperation.operator}</span>
 				{dispatch(makePropertyAccessor(binaryOperation, "right"))}

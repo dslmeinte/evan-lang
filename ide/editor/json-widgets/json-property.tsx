@@ -3,22 +3,26 @@ import * as React from "react";
 
 import {dispatch} from "../dispatcher";
 
-import {FocusWidget} from "../base-widgets";
-import {IWithAccessor} from "../utils/accessor";
+import {IAccessor} from "../utils/accessor";
+import {BaseEditWidget} from "../base-edit-widget";
+import {IJsonProperty} from "../utils/json-property-util";
+import {EditableStringWidget} from "../editable-string-widget";
 
-
-interface IWithAccessorAndName<T> extends IWithAccessor<T> {
-	name: string;
-}
 
 @observer
-export class JsonProperty<T> extends FocusWidget<IWithAccessorAndName<T>> {
+export class JsonProperty extends BaseEditWidget<IJsonProperty> {
 
-	render() {
-		const {name, accessor} = this.props;
+	renderContents(property: IJsonProperty) {
+		const {name, value} = property;
+		const fakeNameAccessor: IAccessor<string> = {
+			set: () => null,
+			value: name,
+			delete: () => null
+		};
+		// FIXME  create accessor for both from IAccessor<IJsonProperty>
 		return (
-			<div onClick={this.handleFocusClick.bind(this)} className={this.genericClassName()}>
-				<span>{name}</span> <span>:</span> {dispatch(accessor)}
+			<div>
+				<EditableStringWidget isBeingEdited={this.isBeingEdited()} accessor={fakeNameAccessor}/> <span>:</span> {dispatch(value)}
 			</div>
 		);
 	}
