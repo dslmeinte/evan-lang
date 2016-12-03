@@ -1,5 +1,5 @@
 import {observable} from "mobx";
-import {ArrayLike} from "../../../core/util";
+import {ArrayLike} from "./object-util";
 
 
 /**

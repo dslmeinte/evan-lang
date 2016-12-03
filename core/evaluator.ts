@@ -1,33 +1,57 @@
 /// <reference path="./typings.d.ts" />
 
-import {isBoolean, isString} from "lodash";
+import {isBoolean, isObject, isString} from "lodash";
+import {isArrayLike} from "mobx";
 
-import {IContext, cloneContext, emptyContext} from "../core/context";
 import {makeIssue, isIssue} from "../core/issues";
-import {makeMapper} from "../core/mapper";
 import * as sTypes from "../core/semantics-types_gen";
 import {isSemanticsTyped} from "../meta/meta-model";
 
 
-export function evaluate(json: any): any {
+type Values = { [name: string]: any };
+type FunctionTable = { [name: string]: any };
 
-	const evaluateInt = makeMapper("evaluate", {
-		"binary operation": evaluateBinaryOperation,
-		"comments": () => undefined,
-		"function application": evaluateFunctionApplication,
-		"function definition": evaluateFunctionDefinition,
-		"function reference": evaluateFunctionReference,
-		"if-then-else": evaluateIfThenElse,
-		"issue": () => undefined,
-		"value reference": evaluateValueReference
-	});
+export function evaluate(json: any, values: Values = {}, functionTable: FunctionTable = {}): any {
 
-	return evaluateInt(json, emptyContext);
+	if (isArrayLike(json)) {
+		return (json as any[]).map(item => evaluate(item, values, functionTable));
+	}
+	if (isObject(json)) {
+		if (isSemanticsTyped(json)) {
+			const object = json as sTypes.SemanticsTyped;
+			switch (object.$sType) {
+				case "binary operation": return evaluators.evaluateBinaryOperation(object, values, functionTable, evaluate);
+				case "comments": return undefined;
+				case "function application": return evaluators.evaluateFunctionApplication(object, values, functionTable, evaluate);
+				case "function definition": return evaluators.evaluateFunctionDefinition(object, functionTable);
+				case "function reference": return evaluators.evaluateFunctionReference(object, functionTable);
+				case "if-then-else": return evaluators.evaluateIfThenElse(object, values, functionTable, evaluate);
+				case "issue": return undefined;
+				case "value reference": return evaluators.evaluateValueReference(object, values);
+				default: return makeIssue(`Cannot evaluate object with sType="${json.$sType}".`, object);
+			}
+		}
+		const result = {};
+		for (let propertyName in json) {
+			if (json.hasOwnProperty(propertyName)) {
+				result[propertyName] = evaluate(json[propertyName], values, functionTable);
+			}
+		}
+		return result;
+	}
+	return json;	// TODO  find out: why undefined -> null?
+}
 
 
-	function evaluateBinaryOperation(operation: sTypes.IBinaryOperation, context: IContext): any {
-		const leftEval = evaluateInt(operation.left, context);
-		const rightEval = evaluateInt(operation.right, context);
+export namespace evaluators {
+
+	type Evaluator = (json: any, values: Values, functionTable: FunctionTable) => any;
+
+	export function evaluateBinaryOperation(
+		operation: sTypes.IBinaryOperation, values: Values, functionTable: FunctionTable, polyEval: Evaluator
+	): any {
+		const leftEval = polyEval(operation.left, values, functionTable);
+		const rightEval = polyEval(operation.right, values, functionTable);
 		try {
 			switch (operation.operator) {
 				case "+": return leftEval + rightEval;
@@ -40,44 +64,55 @@ export function evaluate(json: any): any {
 		// TODO  add a lot of checking
 	}
 
-	function evaluateFunctionApplication(call: sTypes.IFunctionApplication, context: IContext): any {
-		const definition = evaluateInt(call.function, context);
+	export function evaluateFunctionApplication(
+		call: sTypes.IFunctionApplication, values: Values, functionTable: FunctionTable, polyEval: Evaluator
+	): any {
+		const definition = polyEval(call.function, values, functionTable);
 		if (definition === undefined || !isSemanticsTyped(definition) || definition.$sType !== "function definition") {
 			return makeIssue(`Function does not resolve to function definition`, definition);
 		}
 		// TODO  check arguments against parameters
-		const newContext = cloneContext(context);
+		const newValues: Values = {};
 		for (let parameterName in definition.parameters) {
-			const argEval = evaluateInt(call.arguments[parameterName], context);
-			newContext.letValues[parameterName] = argEval;
+			const argEval = polyEval(call.arguments[parameterName], values, functionTable);
+			newValues[parameterName] = argEval;
 		}
-		return evaluateInt(definition.body, newContext);
+		return polyEval(definition.body, newValues, functionTable);
 	}
 
-	function evaluateFunctionReference(call: sTypes.IFunctionReference, context: IContext): sTypes.IFunctionDefinition | sTypes.IIssue | void {
+	export function evaluateFunctionReference(
+		call: sTypes.IFunctionReference, functionTable: FunctionTable
+	): sTypes.IFunctionDefinition | sTypes.IIssue | void {
 		if (!call.name || !isString(call.name)) {
 			return makeIssue(`Function reference has no name.`, call);
 		}
-		return context.functionDefinitions[call.name];
+		return functionTable[call.name];
 	}
 
-	function evaluateFunctionDefinition(definition: sTypes.IFunctionDefinition, context: IContext): sTypes.IIssue | void {
+	export function evaluateFunctionDefinition(
+		definition: sTypes.IFunctionDefinition, functionTable: FunctionTable
+	): sTypes.IIssue | void {
 		const name = definition.name;
 		if (!name || !isString(name)) {
 			return makeIssue(`Function definition lacks string-valued name field.`, definition);
 		}
+		if (name in functionTable) {
+			return makeIssue(`Function definition '${name}' was already defined.`, definition);
+		}
 		// TODO  check parameters and return type
-		context.functionDefinitions[name] = definition;
+		functionTable[name] = definition;
 		return undefined;
 	}
 
-	function evaluateIfThenElse(ifThenElse: sTypes.IIfThenElse, context: IContext): any {
+	export function evaluateIfThenElse(
+		ifThenElse: sTypes.IIfThenElse, values: Values, functionTable: FunctionTable, polyEval: Evaluator
+	): any {
 		if (!ifThenElse.condition || !ifThenElse.trueBranch || !ifThenElse.falseBranch) {
 			return makeIssue(`If-then-else object not complete.`, ifThenElse);
 		}
-		const conditionEval = evaluateInt(ifThenElse.condition, context);
+		const conditionEval = polyEval(ifThenElse.condition, values, functionTable);
 		if (isBoolean(conditionEval)) {
-			return conditionEval ? evaluateInt(ifThenElse.trueBranch, context) : evaluateInt(ifThenElse.falseBranch, context);
+			return polyEval(conditionEval ? ifThenElse.trueBranch : ifThenElse.falseBranch, values, functionTable);
 		} else {
 			const issue = makeIssue(`Condition of if-then-else does not evaluate to boolean.`, ifThenElse);
 			if (isIssue(conditionEval)) {
@@ -87,10 +122,12 @@ export function evaluate(json: any): any {
 		}
 	}
 
-	function evaluateValueReference(valueRef: sTypes.IValueReference, context: IContext): any {
+	export function evaluateValueReference(
+		valueRef: sTypes.IValueReference, values: Values
+	): any {
 		const name = valueRef.name;
-		return name && isString(name) && (name in context.letValues)
-			? context.letValues[name]
+		return name && isString(name) && (name in values)
+			? values[name]
 			: makeIssue(`"${name}" is not a valid name for a value reference.`);
 	}
 

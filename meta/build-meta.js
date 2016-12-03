@@ -39,12 +39,26 @@ function generateSemanticsTypes(metaModel) {
 		]);
 	}
 
+	function generateUnionTypePart(typeName, index) {
+		return "\t" + (index > 0 ? "| " : "") + interfaceTypeName(typeName);
+	}
+
 	return [
 		"import {ISemanticsTyped} from \"./base-semantics-types\";",
 		"",
 		""
 	].concat(mapMap(metaModel, generateTsInterface))
-	.concat([""]);
+	.concat([
+		"",
+		"",
+		"export type SemanticsTyped ="
+	])
+	.concat(Object.keys(metaModel).map(generateUnionTypePart))
+	.concat([
+		"\t;",
+		"",
+		""
+	]);
 
 }
 

@@ -1,7 +1,7 @@
 import * as React from "react";
 
 import {IWithAccessor} from "./utils/accessor";
-import {type} from "../../core/util";
+import {type} from "./utils/object-util";
 import {TypeSelector} from "./type-selector";
 import {editorState, FocusType} from "./state";
 import {preventBubbleUp} from "./utils/ui-util";

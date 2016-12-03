@@ -2,7 +2,7 @@ import {observer} from "mobx-react";
 import * as React from "react";
 
 import {dispatch} from "../dispatcher";
-import {ArrayLike} from "../../../core/util";
+import {ArrayLike} from "../utils/object-util";
 import {makeArrayAccessor} from "../utils/accessor";
 
 import {AddValue} from "../add-value";
