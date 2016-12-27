@@ -1,0 +1,13 @@
+[
+  "Hello Meinte, the answer is: 42.",
+  {
+    "$sType": "issue",
+    "message": "Object 'browser' not injected.",
+    "object": {
+      "$sType": "object-function invocation",
+      "object": "browser",
+      "function": "locationHash",
+      "arguments": []
+    }
+  }
+]

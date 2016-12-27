@@ -2,25 +2,33 @@
   "name": "evan-lang",
   "version": "0.0.1",
   "description": "A vaguely Lispy language in the context of JavaScript.",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/dslmeinte/evan-lang.git"
+  },
   "scripts": {
-    "postinstall": "mkdir -p test/actual",
-    "test": "node dist/test/test-all.js && diff --recursive test/actual/ test/expected/",
-    "pretest": "npm run build-core && cp meta/meta-model.json dist/meta/",
-    "start": "http-server -p 8031 ide/web",
+    "postinstall": "mkdir -p test/evaluation/actual",
+    "test": "node dist/test/eval-programs.js && diff --recursive test/evaluation/actual/ test/evaluation/expected/",
+    "pretest": "npm run build-ts && cp src/meta/meta-model.json dist/meta/",
+    "start": "http-server -p 8031 src/ide/web",
     "prestart": "npm run build-web",
-    "build-meta": "node meta/build-meta.js",
-    "build-core": "tsc",
-    "prebuild-core": "npm run build-meta",
-    "build-web-only": "browserify ide/index.tsx -p [ tsify ] -o ide/web/bundle.js",
-    "build-web": "npm run build-web-only",
-    "prebuild-web": "npm run build-core",
-	"build": "npm run build-web",
-    "watch-web": "watchify ide/index.tsx -p [ tsify ] -o ide/web/bundle.js -v",
-    "clean": "rimraf ide/editor/type-widgets/*.tsx_gen && rimraf test/actual && rimraf dist && rimraf node_modules"
+    "build-meta": "node src/meta/build-meta.js",
+    "build-ts": "tsc",
+    "prebuild-ts": "npm run build-meta",
+    "bundle-web": "browserify src/ide/index.tsx -p [ tsify ] -o src/ide/web/bundle.js",
+    "build-web": "npm run bundle-web",
+    "prebuild-web": "npm run build-ts",
+    "build": "npm run build-web",
+    "watch-web": "watchify src/ide/index.tsx -p [ tsify ] -o src/ide/web/bundle.js -v",
+    "clean": "rimraf ide/editor/type-widgets/*.tsx_gen && rimraf test/evaluation/actual && rimraf dist && rimraf node_modules"
   },
   "author": "Meinte Boersma",
   "license": "MIT",
   "dependencies": {
+    "@types/lodash": "^4.14.44",
+    "@types/node": "^6.0.52",
+    "@types/react": "^0.14.55",
+    "@types/react-dom": "^0.14.19",
     "lodash": "^4.16.1",
     "mobx": "^2.6.1",
     "mobx-react": "^3.5.6",
@@ -31,10 +39,9 @@
     "browserify": "^13.1.0",
     "camelcase": "^3.0.0",
     "http-server": "^0.9.0",
-    "path": "^0.12.7",
     "rimraf": "^2.5.4",
     "tsify": "^1.0.7",
-    "typescript": "^2.0.6",
+    "typescript": "^2.1.4",
     "watchify": "^3.7.0"
   }
 }

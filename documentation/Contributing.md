@@ -52,16 +52,20 @@ Thanks to Jos Warmer of OCL and OpenModeling fame for trying out under Linux and
 
 AKA: You'll find the following in this repository:
 
-* `core/`: all code shared across IDE, testing code, etc.
-* `data/`: contains example programs and other JSON resources.
 * `dist/` (after building): contains JavaScript compiled from TypeScript.
 * `documentation/`: you really have to ask?!
-* `ide/`: the code for the IDE.
-	The simple Node.js `http-server` takes `ide/web/` as Web root.
-* `meta/`: the meta description of Evan (specifically of its semantic types) and simple JavaScript program to generate some TypeScript source files from that.
 * `node_modules/` (after installing): NPM's backyard.
-* `test/`: testing code, including a CLI tool to invoke the evaluator on any JSON.
-* `typings/`: TypeScript typings sourced from DefinitelyTyped, but part of repo to avoid having to use TSD.
+* `src/`: all TypeScript code, further subdivided into:
+	* `core/`: the core of Evan, shared across IDE, testing code, etc.
+	* `external-objects/`: code for external objects that can be injected into the evaluator of Evan programs.
+	* `ide/`: the code for the IDE.
+		The simple Node.js `http-server` takes `src/ide/web/` as Web root.
+	* `meta/`: the meta description of Evan (specifically of its semantic types) and simple JavaScript program to generate some TypeScript source files from that.
+	* `test/`: (unit) testing code.
+* `test/`: testing data.
+	`test/programs/` contains example programs,
+	with `test/evaluation/expected/` describing what these programs are expected to evaluate to,
+	which actually ends up in `test/evaluation/actual/`.
 * Special cameo appearance by: the usual top-level boilerplate suspects.
 
 
@@ -106,19 +110,18 @@ OK, to really change/add something in/to Evan, you might need a more detailed pi
 
 ### Meta building
 
-Evan's language constructs (which I call *semantics types*) are structurally described in `meta/meta-model.json`.
+Evan's language constructs (which I call *semantics types*) are structurally described in `src/meta/meta-model.json`.
 This description is *limited to structure* because that's the information that's fanned out and shared across various implementation aspects: evaluator, IDE.
-When executing `meta/build-meta.js`, the latter reads the description and generates various things:
+When executing `src/meta/build-meta.js`, the latter reads the description and generates various things:
 
-* `core/semantics-types_gen.ts`: interfaces for each semantics type.
-* `ide/editor/polymorphic-dispatcher_gen.ts`: function that dispatches on the semantics type tag in the `$sType` property.
-	(We can do away with this with TypeScript 2.0 because of tagged unions.)
-* `ide/editor/type-widgets/*.tsx_gen`: skeleton implementation code for widgets for each semantics type.
+* `src/core/semantics-types_gen.ts`: interfaces for each semantics type.
+* `src/ide/editor/polymorphic-dispatcher_gen.tsx`: function that dispatches on the semantics type tag in the `$sType` property.
+* `src/ide/editor/type-widgets/*.tsx_gen`: skeleton implementation code for widgets for each semantics type.
 
 
 ### Evaluator
 
-The standalone evaluator that evaluates an Evan program is implemented through the `evaluate` function in `core/evaluator.ts`.
+The standalone evaluator that evaluates an Evan program is implemented through the `evaluate` function in `src/core/evaluator.ts`.
 It's "standalone" in the sense that it's meant to be executed from a CLI as if the program where the whole universe.
 
 <small>
@@ -128,6 +131,6 @@ In the future, we'll likely get evaluators that assume a certain context, like: 
 
 ### IDE
 
-The entry point for the IDE is `ide/index.tsx`.
-The function `dispatch` in `ide/editor/dispatcher.tsx` dispatches objects to their corresponding visualizing/editing widgets in `ide/editor/type-widgets` (and the ones in `ide/editor/json-widgets` for JSON constructs), based on the semantics type tag.
+The entry point for the IDE is `src/ide/index.tsx`.
+The function `dispatch` in `src/ide/editor/dispatcher.tsx` dispatches objects to their corresponding visualizing/editing widgets in `src/ide/editor/type-widgets` (and the ones in `ide/editor/json-widgets` for JSON constructs), based on the semantics type tag.
 

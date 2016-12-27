@@ -1,0 +1,94 @@
+{
+	"binary operation": {
+		"properties": {
+			"operator": { "type": "string" },
+			"left": { "type": "any" },
+			"right": { "type": "any" }
+		},
+		"description": {
+			"$sType": "comments",
+			"text": "A binary operation: <left> <operator> <right>."
+		}
+	},
+	"comments": {
+		"properties": {
+			"text": { "type": "string" }
+		},
+		"description": {
+			"$sType": "comments",
+			"text": "Simple comments."
+		}
+	},
+	"function application": {
+		"properties": {
+			"function": { "type": "any" },
+			"arguments": { "type": "any", "stringMap": true }
+		},
+		"description": {
+			"$sType": "comments",
+			"text": "Application of any function, explicitly referenced or anonymously defined in line."
+		}
+	},
+	"function definition": {
+		"properties": {
+			"name": { "type": "string" },
+			"parameters": { "type": "string", "stringMap": true },
+			"returnType": { "type": "string", "optional": true },
+			"body": { "type": "any" }
+		},
+		"description": {
+			"$sType": "comments",
+			"text": "Definition of a named function. The function is available for program contents _after_ the definition."
+		}
+	},
+	"function reference": {
+		"properties": {
+			"name": { "type": "string" }
+		},
+		"description": {
+			"$sType": "comments",
+			"text": "A reference to named function defined _before_ the reference."
+		}
+	},
+	"if-then-else": {
+		"properties": {
+			"condition": { "type": "any" },
+			"trueBranch": { "type": "any" },
+			"falseBranch": { "type": "any" }
+		},
+		"description": {
+			"$sType": "comments",
+			"text": "A ternary operation: if (<condition>) then <trueBranch> else <elseBranch>."
+		}
+	},
+	"issue": {
+		"properties": {
+			"message": { "type": "string" },
+			"causedBy": { "type": "issue", "ownType": true, "optional": true }
+		},
+		"description": {
+			"$sType": "comments",
+			"text": "An issue, optionally caused by deeper evaluation."
+		}
+	},
+	"object-function invocation": {
+		"properties": {
+			"object": { "type": "string" },
+			"function": { "type": "string" },
+			"arguments": { "type": "any", "list": true }
+		},
+		"description": {
+			"$sType": "comments",
+			"text": "Invokes the referenced function on the referenced object, with the given arguments evaluated. This allows interfacing/-acting with objects outside of pure evan-lang/JSON."
+		}
+	},
+	"value reference": {
+		"properties": {
+			"name": { "type": "string" }
+		},
+		"description": {
+			"$sType": "comments",
+			"text": "A reference to a value defined in the context, e.g. an argument value."
+		}
+	}
+}

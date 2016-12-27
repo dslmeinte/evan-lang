@@ -4,12 +4,12 @@ Roughly in order of importance.
 Done items are prepended with "&#10003;".
 
 * Provide evaluator/interpreter with an environment.
+	* &#10003; Come up with a sensible interface for an environment.
 	* Put resource states in the environment.
 	* Provide some sensible implementations of resource states (disk/local storage-based, etc.).
 	* Put a React binding in the environment.
-	* Implement semantics types that make use of this environment.
+	* &#10003; Implement semantics types that make use of this environment.
 * Do an experiment with React reacting off changes in visualized JSON, while keeping edit state.
-* Think about how to inject observability in the evaluator/interpreter.
 * Extend visualizer with selecting and editing (and folding) capabilities:
 	* &#10003; Be able to select rendered components.
 	* &#10003; Provide generic "add something" component.

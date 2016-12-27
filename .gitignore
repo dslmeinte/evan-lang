@@ -1,11 +1,14 @@
 dist/
-ide/web/bundle.js
+src/ide/web/bundle.js
 node_modules/
-test/actual/
+test/evaluation/actual/
 
 **/*.tsx_gen
 **/*_gen.ts*
 
 # Visual Studio Code:
 .vscode/
+
+# yarn:
+yarn.lock
 

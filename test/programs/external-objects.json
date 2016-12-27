@@ -1,0 +1,17 @@
+[
+	{
+		"$sType": "object-function invocation",
+		"object": "testObject",
+		"function": "testFunction",
+		"arguments": [
+			"Meinte",
+			21
+		]
+	},
+	{
+		"$sType": "object-function invocation",
+		"object": "browser",
+		"function": "locationHash",
+		"arguments": []
+	}
+]
