@@ -31,6 +31,7 @@ Pros:
 * Focuses on the content, rather than on the syntax.
 	The concrete, visual syntax can be made custom for any domain.
 	You can even make the projection switchable.
+
 * No pollution due to limitations of parser technology.
 	Language composition in particular is "easy".
 
@@ -43,7 +44,7 @@ Cons:
 
 	This is a lot of text to simply say: there's no easy (as in: free) way to `vim` your way into projectional content.
 
-	Evan solves this by choosing upfront an extremely well-known canonical representation: JSON.
+	Evan tries to mitigate this by choosing upfront an extremely well-known canonical representation: JSON.
 
 * All behavior is UI work.
 

@@ -1,5 +1,8 @@
 import {isObject, isString, indexOf, keys} from "lodash";
 
+/*
+ * The following type definitions _must_ match `./meta-model.json`.
+ */
 
 interface IMetaModel {
 	[typeName: string]: IMetaType;
@@ -23,6 +26,11 @@ interface IPropertyDescription {
 
 const TYPE_KEY_NAME = "$sType";
 
+/**
+ * The default instance, exported from this file,
+ * of this class encapsulates the meta model,
+ * i.e. a formal description of all sTypes.
+ */
 export class MetaModel {
 
 	constructor(private metaModel: IMetaModel) {}
@@ -47,6 +55,9 @@ const metaModelJson = require("./meta-model.json");
 export default new MetaModel(metaModelJson);
 
 
+/**
+ * @returns whether the given JSON value is a semantically-typed object.
+ */
 export function isSemanticsTyped(json: any) {
 	if (isObject(json)) {
 		const sTypeValue = json[TYPE_KEY_NAME];
@@ -55,7 +66,10 @@ export function isSemanticsTyped(json: any) {
 	return false;
 }
 
-export function	sType(json: Object) {
-	return json[TYPE_KEY_NAME];
+/**
+ * @returns the semantics type from the given object.
+ */
+export function	sType(object: Object) {
+	return object[TYPE_KEY_NAME];
 }
 

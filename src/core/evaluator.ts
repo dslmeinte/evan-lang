@@ -1,5 +1,6 @@
 import {isBoolean, isFunction, isObject, isString} from "lodash";
 import {isArrayLike} from "mobx";
+import * as React from "react";
 
 import {makeIssue, isIssue} from "../core/issues-util";
 import * as sTypes from "../core/semantics-types_gen";
@@ -8,9 +9,13 @@ import {isSemanticsTyped} from "../meta/meta-model";
 
 type Dictionary = { [name: string]: any };
 
+/**
+ * Evaluates the given JSON as Evan program against the optionally-given object table.
+ */
 export function evaluate(json: any, objectTable: Dictionary = {}): any {
 	return polyEval(json, {}, {}, objectTable);
 }
+
 
 // Note: arguments are ordered left-to-right from "entirely local" to "entirely global".
 function polyEval(json: any, values: Dictionary, functionTable: Dictionary, objectTable: Dictionary): any {
@@ -26,6 +31,7 @@ function polyEval(json: any, values: Dictionary, functionTable: Dictionary, obje
 				case "function application": return evaluators.evaluateFunctionApplication(object, values, functionTable, objectTable, polyEval);
 				case "function definition": return evaluators.evaluateFunctionDefinition(object, functionTable);
 				case "function reference": return evaluators.evaluateFunctionReference(object, functionTable);
+				case "HTML element": return evaluators.evaluateHtmlElement(object, values, functionTable, objectTable, polyEval);
 				case "if-then-else": return evaluators.evaluateIfThenElse(object, values, functionTable, objectTable, polyEval);
 				case "issue": return undefined;
 				case "object-function invocation": return evaluators.evaluateObjectFunctionInvocation(object, values, functionTable, objectTable, polyEval);
@@ -45,6 +51,9 @@ function polyEval(json: any, values: Dictionary, functionTable: Dictionary, obje
 }
 
 
+/**
+ * The implementation of the semantics of all the existing sTypes.
+ */
 export namespace evaluators {
 
 	type Evaluator = (json: any, values: Dictionary, functionTable: Dictionary, objectTable: Dictionary) => any;
@@ -104,6 +113,16 @@ export namespace evaluators {
 		// TODO  check parameters and return type
 		functionTable[name] = definition;
 		return undefined;
+	}
+
+	export function evaluateHtmlElement(
+		htmlElement: sTypes.IHtmlElement, values: Dictionary, functionTable: Dictionary, objectTable: Dictionary, polyEval: Evaluator
+	): React.DOMElement<string, Element> | void {
+		const props: any = {};
+		if (htmlElement.classes) {
+			props.className = htmlElement.classes.join(" ");
+		}
+		return React.createElement(htmlElement.tag, props, polyEval(htmlElement.contents, values, functionTable, objectTable));
 	}
 
 	export function evaluateIfThenElse(

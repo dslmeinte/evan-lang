@@ -50,6 +50,17 @@
 			"text": "A reference to named function defined _before_ the reference."
 		}
 	},
+	"HTML element": {
+		"properties": {
+			"tag": { "type": "string" },
+			"classes": { "type": "string", "list": true },
+			"contents": { "type": "any" }
+		},
+		"description": {
+			"$sType": "comments",
+			"text": "A HTML element which is to be rendered as such when embedding the evaluator in a browser."
+		}
+	},
 	"if-then-else": {
 		"properties": {
 			"condition": { "type": "any" },

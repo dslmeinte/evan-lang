@@ -1,0 +1,11 @@
+{
+  "type": "div",
+  "key": null,
+  "ref": null,
+  "props": {
+    "className": "foo bar",
+    "children": "some text"
+  },
+  "_owner": null,
+  "_store": {}
+}

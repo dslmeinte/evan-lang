@@ -5,15 +5,18 @@ import {editorState} from "./editor/state";
 import {EditorView} from "./editor/view";
 import {EvaluationView} from "./evaluation-view";
 
+import {browser} from "../external-objects/browser";
 import {exampleRepository} from "../external-objects/example-repository";
 import {RepositoryView} from "./repository-view";
 
 
 if (location.hash) {
-	const path = location.hash.substring(1);
-	const resourceToLoad = exampleRepository.resourceByPath(path);
-	if (resourceToLoad) {
-		editorState.setResource(path, resourceToLoad);
+	const path = browser.uriHash();
+	if (path) {
+		const resourceToLoad = exampleRepository.resourceByPath(path);
+		if (resourceToLoad) {
+			editorState.setResource(path, resourceToLoad);
+		}
 	}
 }
 

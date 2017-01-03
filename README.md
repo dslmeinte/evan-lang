@@ -1,11 +1,18 @@
 # Evan: EValuation of Abstract Nodes
 
-The main goal of the *Evan programming language* is to bootstrap a working, functional-style general purpose programming language which nestles comfortably in the JavaScript-world, complete with tools like an evaluator and IDE.
+The main goal of the *Evan programming language* is to bootstrap a working, functional-style general purpose programming language which nestles comfortably in the JavaScript-world, complete with tools like an IDE.
 
 It also ports selected virtues of a number of existing languages (most notably: Lisp) to the context of JavaScript.
 The IDE should (eventually) be implemented as an Evan program itself, making it meta-circular.
 
 The following technology is used: Node.js, NPM, TypeScript, Browserify, React and [MobX](https://mobxjs.github.io/mobx/).
+
+## How does it work
+
+The Evan language is implemented by means of an *evaluator*, which transforms *any* JSON into a JavaScript value.
+Often, this is again JSON but it can also be React DOM elements which are then rendered into a browser.
+The evaluation is in principle functional, in the sense that evaluating the same piece of JSON leads to the same result.
+Also, the evaluation is wired to happen incremental (using MobX), so (small) changes to the JSON input should only require a partial re-evaluation, for better performance.
 
 
 ## Getting started
@@ -31,6 +38,7 @@ Note that you can use `yarn` instead of `npm` everywhere, although the scripts i
 All other documentation you can find under [`documentation/`](./documentation).
 Right now, the menu offers the following selection of dishes:
 
+* [What's been added recently](./documentation/Updates.md)
 * [How to contribute](./documentation/Contributing.md)
 * [TODOs that form a short-term roadmap of sorts](./documentation/TODO.md)
 * [A primordial design](./documentation/Design.md)
@@ -41,5 +49,4 @@ Right now, the menu offers the following selection of dishes:
 
 As you've probably already noticed, the "Evan" acronym is awkward.
 That's because is retrofitted to the name of my first-born :)
-
 

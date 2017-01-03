@@ -17,8 +17,7 @@
         "target": "es5"
     },
     "filesGlob": [
-        "./core/**/*.ts",
-        "./test/**/*.ts",
+        "./src/**/*.ts",
         "!./node_modules/**/*.ts"
     ]
 }

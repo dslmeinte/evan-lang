@@ -77,12 +77,12 @@ After cloning the repo and before doing anything, execute:
 
 The following NPM commands can then be ran:
 
-* * `npm run build-meta`: builds some TypeScript source files (interfaces, widget implementation skeletons) from the definition of Evan in `meta/meta-model.json`.
-* `npm run build-core`: builds everything apart from the IDE code.
-* `npm test`: runs `test/test-all.ts` that runs the evaluator (after having built it) on all files in `data/`, saves the results in `test/actual/` and compares these (using POSIX `diff`) with the ones in `test/expected/`.
-* `npm run build-web`: builds everything including the IDE code.
-* `npm start`: starts a Web server serving the IDE on [`localhost:8031`](http://localhost:8031) after building everything.
-* `npm run watch-web`: watches every TS source in `ide/` (and referred from it) and recompiles and -Browserifies.
+* `npm run build-meta`: generates some TypeScript source files (interfaces, widget implementation skeletons) from the definition of Evan in `meta/meta-model.json`.
+* `npm run build-ts`: compiles all TypeScript source code.
+* `npm test`: runs `src/test/eval-programs.ts` that runs the evaluator (after having built it) on all files in `test/programs/`, saves the results in `test/evaluation/actual/` and compares these (using POSIX `diff`) with the ones in `test/evaluation/expected/`.
+* `npm run bundle-ide`: bundles the IDE code for execution in a browser.
+* `npm run start-ide`: starts a Web server serving the IDE on [`localhost:8031`](http://localhost:8031) after building everything.
+* `npm run watch-ide`: watches every TS source in `src/ide/` (and referred from it) and recompiles and -Browserifies.
 	You still have to refresh/reload in the browser, though.
 * `npm run clean`: cleans the repository from installed, generated or compiled artifacts.
 	Afterwards: jump to 0.
@@ -100,7 +100,7 @@ Everything should work fine under Mac (which I use) or Linux, but nothing's guar
 To annoy as many people as possible and/or potentially start pseudo-religious wars of the `vi` vs. `emacs`-kind, I added a configuration for TSLint.
 Enable the TSLint plugin for your TypeScript-IDE-du-jour at your own leisure and risk.
 
-To tighten the feedback loop, see also the **Watching** section above.
+To tighten the feedback loop, use the `watch-ide` NPM script described above.
 
 
 ## Understanding the code base
@@ -110,7 +110,7 @@ OK, to really change/add something in/to Evan, you might need a more detailed pi
 
 ### Meta building
 
-Evan's language constructs (which I call *semantics types*) are structurally described in `src/meta/meta-model.json`.
+Evan's language constructs (which I call *semantics types*, or *sTypes* for short) are structurally described in `src/meta/meta-model.json`.
 This description is *limited to structure* because that's the information that's fanned out and shared across various implementation aspects: evaluator, IDE.
 When executing `src/meta/build-meta.js`, the latter reads the description and generates various things:
 
@@ -122,11 +122,6 @@ When executing `src/meta/build-meta.js`, the latter reads the description and ge
 ### Evaluator
 
 The standalone evaluator that evaluates an Evan program is implemented through the `evaluate` function in `src/core/evaluator.ts`.
-It's "standalone" in the sense that it's meant to be executed from a CLI as if the program where the whole universe.
-
-<small>
-In the future, we'll likely get evaluators that assume a certain context, like: a browser with React and MobX loaded; running in Node.js; being able to access a JSON resources store.
-</small>
 
 
 ### IDE

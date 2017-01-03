@@ -12,7 +12,7 @@ An Evan program to make use of that, could look as follows:
 {
 	"$sType": "object-function invocation",
 	"object": "browser",
-	"function": "locationHash",
+	"function": "uriHash",
 	"arguments": []
 }
 ```

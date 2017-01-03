@@ -1,5 +1,8 @@
 import {observable} from "mobx";
 
+/**
+ * In-memory, non-persisting repository of opaque JSON resources.
+ */
 export class Repository {
 
 	@observable private _resourcesMap: { [path: string]: any } = {};

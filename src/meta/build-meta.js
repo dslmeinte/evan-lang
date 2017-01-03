@@ -1,3 +1,8 @@
+/*
+ * This Node.js program generates a number of files from `./meta-model.json`
+ * which describes all sTypes formally.
+ */
+
 const camelCase = require("camelcase");
 const fs = require("fs");
 const lodash = require("lodash");
@@ -46,11 +51,17 @@ function generateSemanticsTypes(metaModel) {
 	return [
 		"import {ISemanticsTyped} from \"./base-semantics-types\";",
 		"",
+		"/*",
+		" * Type definitions for all semantics types (sTypes).",
+		" */",
 		""
 	].concat(mapMap(metaModel, generateTsInterface))
 	.concat([
 		"",
 		"",
+		"/**",
+		" * Union type for all semantics types (sTypes) - convenient e.g. for switch statements.",
+		" */",
 		"export type SemanticsTyped ="
 	])
 	.concat(Object.keys(metaModel).map(generateUnionTypePart))
@@ -128,7 +139,7 @@ function attributeName(typeName) {
 
 
 function fileName(typeName) {
-	return typeName.replace(/[ ]/g, "-");
+	return typeName.replace(/[ ]/g, "-").toLowerCase();
 }
 
 

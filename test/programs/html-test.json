@@ -1,0 +1,6 @@
+{
+    "$sType": "HTML element",
+    "tag": "div",
+    "classes": [ "foo", "bar" ],
+    "contents": "some text"
+}

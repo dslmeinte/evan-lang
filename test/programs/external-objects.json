@@ -11,7 +11,7 @@
 	{
 		"$sType": "object-function invocation",
 		"object": "browser",
-		"function": "locationHash",
+		"function": "uriHash",
 		"arguments": []
 	}
 ]
