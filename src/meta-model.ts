@@ -1,4 +1,4 @@
-import {isObject, isString, indexOf, keys} from "lodash";
+import {util} from "./util";
 
 /*
  * The following type definitions _must_ match `./meta-model.json`.
@@ -32,36 +32,35 @@ const TYPE_KEY_NAME = "$sType";
  * i.e. a formal description of all sTypes.
  */
 export class MetaModel {
+	private _model: IMetaModel;
 
-	constructor(private metaModel: IMetaModel) {}
+	constructor(model: IMetaModel) {
+		this._model = model;
+	}
 
 	sTypes(): string[] {
-		return keys(this.metaModel);
+		return Object.keys(this._model);
 	}
 
 	createOfSType(sType: string) {
-		if (indexOf(this.sTypes(), sType) < 0) {
+		if (this.sTypes().indexOf(sType) < 0) {
 			throw new Error(`Cannot create instance of: ${sType}`);
 		}
+
 		return {
 			[TYPE_KEY_NAME]: sType,
-			...this.metaModel[sType].initialValue
+			...this._model[sType].initialValue
 		};
 	}
-
 }
-
-const metaModelJson = require("./meta-model.json");
-export default new MetaModel(metaModelJson);
-
 
 /**
  * @returns whether the given JSON value is a semantically-typed object.
  */
 export function isSemanticsTyped(json: any) {
-	if (isObject(json)) {
+	if (util.isObject(json)) {
 		const sTypeValue = json[TYPE_KEY_NAME];
-		return sTypeValue && isString(sTypeValue);
+		return sTypeValue && util.isString(sTypeValue);
 	}
 	return false;
 }
