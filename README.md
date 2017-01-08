@@ -50,3 +50,6 @@ Right now, the menu offers the following selection of dishes:
 As you've probably already noticed, the "Evan" acronym is awkward.
 That's because is retrofitted to the name of my first-born :)
 
+# License
+
+MIT
