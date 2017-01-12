@@ -24,20 +24,20 @@ export interface IWithAccessor<T> {
 
 export function makePropertyAccessor(object: Object, propertyName: string): IAccessor<any> {
 	const observableObject = observable(object);
-	return observable({
+	return {
 		get value() { return observableObject[propertyName]; },
 		set: (newValue: any) => { observableObject[propertyName] = newValue; },
 		"delete": () => { delete observableObject[propertyName]; }
-	});
+	};
 }
 
 
 export function makeArrayAccessor<T>(array: ArrayLike<T>, index: number): IAccessor<any> {
 	const observableArray = observable(array);
-	return observable({
+	return {
 		get value() { return observableArray[index]; },
 		set: (newValue: any) => { observableArray[index] = newValue; },
 		"delete": () => { observableArray.splice(index, 1); }
-	});
+	};
 }
 
