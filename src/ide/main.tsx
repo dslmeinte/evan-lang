@@ -27,6 +27,6 @@ ReactDOM.render(
 		<EditorView />
 		<EvaluationView />
 	</div>,
-	document.getElementById("root")!
+	document.getElementById("main")!
 );
 
