@@ -18,7 +18,7 @@
     "build": "npm run clean && tsc",
     "prepublish": "npm run test && npm run build",
     "watch": "npm run clean && tsc --watch",
-    "build-ide": "NODE_ENV=production browserify -p tsify src/ide/main.tsx -o public/bundle.js",
+    "build-ide": "NODE_ENV=production browserify -p tsify src/ide/main.tsx | uglifyjs -c > public/bundle.js",
     "watch-ide": "watchify src/ide/main.tsx -p tsify -o public/bundle.js -dv",
     "ide": "npm run clean && concurrently --raw \"ecstatic -p 8070 public\" \"npm run watch-ide\" --kill-others"
   },
@@ -52,7 +52,7 @@
     "tape-watch": "^2.2.4",
     "tsify": "^3.0.0",
     "typescript": "^2.1.4",
-    "uglify-js": "^2.7.5",
+    "uglify-js": "mishoo/UglifyJS2#harmony",
     "watchify": "^3.8.0"
   }
 }
