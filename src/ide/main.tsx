@@ -20,13 +20,32 @@ if (location.hash) {
 	}
 }
 
-ReactDOM.render(
-	<div>
-		<RepositoryView />
-		<hr />
-		<EditorView />
-		<EvaluationView />
-	</div>,
-	document.getElementById("main")!
-);
+class IDE extends React.Component<void, void> {
+	render() {
+		return (
+			<div>
+				<RepositoryView />
+				<hr />
+				<EditorView />
+				<EvaluationView />
+			</div>
+		);
+	}
+}
 
+class UpdateWrapper extends React.Component<void, void> {
+	componentWillMount() {
+		this.forceUpdate(); // a little hack to help us rerender when this module is reloaded
+	}
+
+	render() {
+		return <IDE />;
+	}
+}
+
+const ud = require("ud");
+
+ReactDOM.render(
+	React.createElement(ud.defn(module, UpdateWrapper)),
+	document.getElementById("main")
+);
