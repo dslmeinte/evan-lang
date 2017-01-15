@@ -4,6 +4,7 @@ import {IObservableArray, isArrayLike} from "mobx";
 import {ISemanticsTyped} from "../../../latest";
 import {isSemanticsTyped} from "../../../meta-model";
 
+import * as React from "react";
 
 export type ArrayLike<T> = Array<T> | IObservableArray<T>;
 
@@ -32,5 +33,8 @@ export function mapMap<V, R>(map: { [key: string]: V; }, func: (key: string, val
  * @returns the given JSON in pretty-printed form (undefined-safe).
  */
 export function prettyJson(json: any) {
+	if (React.isValidElement(json)) {
+		return json;
+	}
 	return json === undefined ? "undefined" : JSON.stringify(json, null, 2);
 }
