@@ -1,6 +1,6 @@
 {
   "name": "evan-lang",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "A vaguely Lispy language in the context of JavaScript.",
   "repository": {
     "type": "git",
