@@ -33,6 +33,8 @@
     "@types/node": "^6.0.52",
     "@types/react": "^0.14.55",
     "@types/react-dom": "^0.14.19",
+    "indent-string": "^3.0.0",
+    "is-integer": "^1.0.6",
     "lodash": "^4.16.1",
     "mobx": "^2.6.1",
     "mobx-react": "^3.5.6",

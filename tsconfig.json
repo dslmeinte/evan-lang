@@ -1,9 +1,7 @@
 {
-    "version": "2.0.3",
+    "version": "2.1.4",
     "compilerOptions": {
-        "declaration": false,
-        "experimentalDecorators": true,
-        "jsx": "react",
+        "declaration": true,
         "module": "commonjs",
 		"noFallthroughCasesInSwitch": true,
 		"noImplicitAny": true,
@@ -11,13 +9,12 @@
 		"noImplicitThis": true,
 		"noUnusedLocals": true,
 		"noUnusedParameters": false,
-        "outDir": "dist/",
+        "outDir": "lib",
 		"suppressImplicitAnyIndexErrors": true,
 		"strictNullChecks": true,
         "target": "es5"
     },
-    "filesGlob": [
-        "./src/**/*.ts",
-        "!./node_modules/**/*.ts"
+    "files": [
+		"src/index.ts"
     ]
 }
