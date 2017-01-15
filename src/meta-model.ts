@@ -4,27 +4,26 @@ import {util} from "./util";
  * The following type definitions _must_ match `./meta-model.json`.
  */
 
-interface IMetaModel {
+export interface IMetaModel {
 	[typeName: string]: IMetaType;
 }
 
-interface IMetaType {
+export interface IMetaType {
 	properties: { [propertyName: string]: IPropertyDescription };
 	description: any;
 	initialValue: Object;
 }
 
-type IType = "string" | "Object" | "any";
+export type IType = "string" | "Object" | "any";
 
-interface IPropertyDescription {
+export interface IPropertyDescription {
 	type: IType;
 	stringMap?: boolean;
 	optional?: boolean;
 	ownType?: boolean;
 }
 
-
-const TYPE_KEY_NAME = "$sType";
+export const TYPE_KEY_NAME = "$sType";
 
 /**
  * The default instance, exported from this file,
@@ -71,4 +70,3 @@ export function isSemanticsTyped(json: any) {
 export function	sType(object: Object) {
 	return object[TYPE_KEY_NAME];
 }
-
