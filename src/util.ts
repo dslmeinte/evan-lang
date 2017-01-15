@@ -23,6 +23,8 @@ export namespace util {
 				&& x.constructor.name === "ObservableArray");
 	}
 
+	export const isInteger = require("is-integer");
+
 	export type IDictionary = { [name: string]: any };
 
 }
