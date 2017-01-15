@@ -60,7 +60,7 @@ Right now, the menu offers the following selection of dishes:
 # about the name
 
 As you've probably already noticed, the "Evan" acronym is awkward.
-That's because is retrofitted to the name of my first-born :)
+That's because is retrofitted to the name of Meinte's first-born :)
 
 
 # license

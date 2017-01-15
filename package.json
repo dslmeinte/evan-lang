@@ -22,7 +22,10 @@
     "watch-ide": "watchify src/ide/main.tsx -p tsify -o public/bundle.js -dv",
     "ide": "concurrently --raw \"ecstatic -p 8070 public\" \"npm run watch-ide\" --kill-others"
   },
-  "author": "Meinte Boersma",
+  "contributors": [
+    "Meinte Boersma <meinte.boersma@gmail.com> (http://www.dslconsultancy.com/)",
+    "Onur Gunduz <ogunduz@gmail.com> (http://onurgunduz.com/)"
+  ],
   "license": "MIT",
   "dependencies": {
     "indent-string": "^3.0.0",
