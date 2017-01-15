@@ -1,12 +1,12 @@
 import {Repository} from "./repository";
 
 
-const fib = require("../../test/programs/fib.json");
-const externalObjects = require("../../test/programs/external-objects.json");
-const htmlTest = require("../../test/programs/html-test.json");
-const simple = require("../../test/programs/simple.json");
-const simpleFunc = require("../../test/programs/simple-func.json");
-const metaModel = require("../../src/meta/meta-model.json");
+const fib = require("../../../fixtures/programs/fib.json");
+const externalObjects = require("../../../fixtures/programs/external-objects.json");
+const htmlTest = require("../../../fixtures/programs/html-test.json");
+const simple = require("../../../fixtures/programs/simple.json");
+const simpleFunc = require("../../../fixtures/programs/simple-func.json");
+const metaModel = require("../../../latest");
 
 
 /**
