@@ -4,7 +4,7 @@ import * as React from "react";
 import {makePropertyAccessor, makeArrayAccessor} from "../utils/accessor";
 import {BaseEditWidget} from "../base-edit-widget";
 import {dispatch} from "../dispatcher";
-import {IObjectFunctionInvocation} from "../../../core/semantics-types_gen";
+import {IObjectFunctionInvocation} from "../../../latest";
 
 
 @observer
@@ -14,7 +14,7 @@ export class ObjectFunctionInvocation extends BaseEditWidget<IObjectFunctionInvo
 		return (
 			<div>
 				{dispatch(makePropertyAccessor(objectFunctionInvocation, "object"))}.{dispatch(makePropertyAccessor(objectFunctionInvocation, "function"))} <span>(</span>
-					{objectFunctionInvocation.arguments.map((argument, index) => (
+					{objectFunctionInvocation.arguments.map((argument: any, index: any) => (
 						<div className="indent" key={"argument-" + index}>
 							{dispatch(makeArrayAccessor(objectFunctionInvocation.arguments, index))}
 						</div>

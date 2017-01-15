@@ -1,11 +1,11 @@
 import {observer} from "mobx-react";
 import * as React from "react";
 
-import {evaluate} from "../core/evaluator";
+import {evaluate} from "../evan";
 import {editorState} from "./editor/state";
-import {prettyJson} from "../core/util";
-import {browser} from "../external-objects/browser";
-import {testObject} from "../external-objects/test-object";
+import {prettyJson} from "./editor/utils/object-util";
+import {browser} from "./external-objects/browser";
+import {testObject} from "./external-objects/test-object";
 
 
 @observer

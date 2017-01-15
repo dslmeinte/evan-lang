@@ -1,7 +1,7 @@
 import {observer} from "mobx-react";
 import * as React from "react";
 
-import {IComments} from "../../../core/semantics-types_gen";
+import {IComments} from "../../../latest";
 import {BaseEditWidget} from "../base-edit-widget";
 
 

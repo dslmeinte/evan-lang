@@ -1,7 +1,7 @@
 import {observer} from "mobx-react";
 import * as React from "react";
 
-import {exampleRepository} from "../external-objects/example-repository";
+import {exampleRepository} from "./external-objects/example-repository";
 import {editorState} from "./editor/state";
 
 

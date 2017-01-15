@@ -4,7 +4,7 @@ import * as React from "react";
 import {makePropertyAccessor} from "../utils/accessor";
 import {BaseEditWidget} from "../base-edit-widget";
 import {dispatch} from "../dispatcher";
-import {IFunctionApplication} from "../../../core/semantics-types_gen";
+import {IFunctionApplication} from "../../../latest";
 import {mapMap} from "../utils/object-util";
 
 

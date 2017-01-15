@@ -3,7 +3,7 @@ import * as React from "react";
 
 import {preventBubbleUp} from "./utils/ui-util";
 
-import {default as metaModelInstance} from "../../meta/meta-model";
+import {default as metaModelInstance} from "../instance";
 const sTypes = metaModelInstance.sTypes();
 
 

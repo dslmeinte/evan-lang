@@ -6,9 +6,9 @@ import {JsonArray} from "./json-widgets/json-array";
 import {JsonObject} from "./json-widgets/json-object";
 import {JsonSimpleValue} from "./json-widgets/json-simple-value";
 import {IAccessor} from "./utils/accessor";
-import {polyDispatch} from "./polymorphic-dispatcher_gen";
-import {prettyJson} from "../../core/util";
-import {isSemanticsTyped, sType} from "../../meta/meta-model";
+import {polyDispatch} from "./polymorphic-dispatcher";
+import {prettyJson} from "./utils/object-util";
+import {isSemanticsTyped, sType} from "../../meta-model";
 
 
 export function dispatch(accessor: IAccessor<any>, key?: string) {

@@ -3,7 +3,7 @@ import * as React from "react";
 
 import {BaseEditWidget} from "../base-edit-widget";
 import {dispatch} from "../dispatcher";
-import {IHtmlElement} from "../../../core/semantics-types_gen";
+import {IHtmlElement} from "../../../latest";
 
 
 @observer

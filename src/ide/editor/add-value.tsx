@@ -5,7 +5,7 @@ import {indexOf} from "lodash";
 import {editorState, FocusType} from "./state";
 import {preventBubbleUp} from "./utils/ui-util";
 
-import {default as metaModelInstance} from "../../meta/meta-model";
+import {default as metaModelInstance} from "../instance";
 const sTypes = metaModelInstance.sTypes();
 
 

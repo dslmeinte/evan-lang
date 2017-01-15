@@ -4,7 +4,7 @@ import * as React from "react";
 import {makePropertyAccessor} from "../utils/accessor";
 import {BaseEditWidget} from "../base-edit-widget";
 import {dispatch} from "../dispatcher";
-import {IIfThenElse} from "../../../core/semantics-types_gen";
+import {IIfThenElse} from "../../../latest";
 
 
 @observer

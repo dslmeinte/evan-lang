@@ -1,8 +1,8 @@
 import {isObject} from "lodash";
 import {IObservableArray, isArrayLike} from "mobx";
 
-import {ISemanticsTyped} from "../../../core/base-semantics-types";
-import {isSemanticsTyped} from "../../../meta/meta-model";
+import {ISemanticsTyped} from "../../../latest";
+import {isSemanticsTyped} from "../../../meta-model";
 
 
 export type ArrayLike<T> = Array<T> | IObservableArray<T>;

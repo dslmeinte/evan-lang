@@ -5,8 +5,8 @@ import {editorState} from "./editor/state";
 import {EditorView} from "./editor/view";
 import {EvaluationView} from "./evaluation-view";
 
-import {browser} from "../external-objects/browser";
-import {exampleRepository} from "../external-objects/example-repository";
+import {browser} from "./external-objects/browser";
+import {exampleRepository} from "./external-objects/example-repository";
 import {RepositoryView} from "./repository-view";
 
 
