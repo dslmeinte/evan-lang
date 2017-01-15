@@ -14,13 +14,13 @@
   "scripts": {
     "test": "npm run build && tape lib/test/*.js | tap-diff",
     "test-watch": "npm run build && concurrently --raw \"npm run watch\" \"tape-watch lib/test/*.js -p tap-diff\" --kill-others",
-    "clean": "rm -fr lib",
+    "clean": "rm -fr lib && rm -f public/bundle.js",
     "build": "npm run clean && tsc",
     "prepublish": "npm run test && npm run build",
     "watch": "npm run clean && tsc --watch",
     "build-ide": "NODE_ENV=production browserify -p tsify src/ide/main.tsx -o public/bundle.js",
     "watch-ide": "watchify src/ide/main.tsx -p tsify -o public/bundle.js -dv",
-    "ide": "concurrently --raw \"ecstatic -p 8070 public\" \"npm run watch-ide\" --kill-others"
+    "ide": "npm run clean && concurrently --raw \"ecstatic -p 8070 public\" \"npm run watch-ide\" --kill-others"
   },
   "contributors": [
     "Meinte Boersma <meinte.boersma@gmail.com> (http://www.dslconsultancy.com/)",
