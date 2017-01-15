@@ -14,7 +14,7 @@ const argv: any = minimist(process.argv.slice(2), {
 
 const file: string = argv._[0];
 
-if ((!file && !argv.semantics) || argv.help) {
+if ((!file && !argv.semantics && !argv.version) || argv.help) {
 	showUsage();
 } else if (argv.semantics) {
 	const data = require("../../latest.json");
