@@ -28,3 +28,9 @@ export function mapMap<V, R>(map: { [key: string]: V; }, func: (key: string, val
 	return Object.keys(map).map(key => func(key, map[key]));
 }
 
+/**
+ * @returns the given JSON in pretty-printed form (undefined-safe).
+ */
+export function prettyJson(json: any) {
+	return json === undefined ? "undefined" : JSON.stringify(json, null, 2);
+}
