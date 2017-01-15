@@ -1,4 +1,4 @@
-import {isObject} from "lodash";
+import {util} from "../../../util";
 import {IObservableArray, isArrayLike} from "mobx";
 
 import {ISemanticsTyped} from "../../../latest";
@@ -12,7 +12,7 @@ export function type(json: any) {
 		return "json-array";
 	}
 
-	if (isObject(json)) {
+	if (util.isObject(json)) {
 		if (isSemanticsTyped(json)) {
 			const object = json as ISemanticsTyped;
 			return object.$sType;

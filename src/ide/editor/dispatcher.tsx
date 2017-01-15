@@ -1,5 +1,4 @@
-import {isObject} from "lodash";
-import {isArrayLike} from "mobx";
+import {util} from "../../util";
 import * as React from "react";
 
 import {JsonArray} from "./json-widgets/json-array";
@@ -13,10 +12,10 @@ import {isSemanticsTyped, sType} from "../../meta-model";
 
 export function dispatch(accessor: IAccessor<any>, key?: string) {
 	const json: any = accessor.value;
-	if (isArrayLike(json)) {
+	if (util.isArrayLike(json)) {
 		return <JsonArray accessor={accessor} key={key} />;
 	}
-	if (isObject(json)) {
+	if (util.isObject(json)) {
 		if (isSemanticsTyped(json)) {
 			const component = polyDispatch(sType(json), accessor, key);
 			if (component) {

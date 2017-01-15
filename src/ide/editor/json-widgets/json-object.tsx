@@ -1,4 +1,3 @@
-import {isEmpty} from "lodash";
 import {observer} from "mobx-react";
 import * as React from "react";
 
@@ -46,7 +45,7 @@ export class JsonObject<T extends Object> extends BaseEditWidget<T> {
 
 	private validateName(): string | null {
 		const name = this.newName();
-		if (isEmpty(name)) {
+		if (!name) {
 			return "name cannot be empty";
 		}
 		// TODO  add more name validation
