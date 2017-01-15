@@ -25,8 +25,8 @@ Type `npm run NAME` to execute any of the commands below:
 | `test` | run evaluator & meta-model generation tests |
 | `test-watch` | run evaluator & meta-model generation tests in watch-mode |
 | `clean` | clean build artifacts |
-| `build` | transpile `ts(x)``'s' to `lib/`` dir |
-| `watch` | transpile `ts(x)`'s to `lib/`` in watch-mode |
+| `build` | transpile `ts(x)`'s to `lib/` dir |
+| `watch` | transpile `ts(x)`'s to `lib/` in watch-mode |
 | `build-ide` | build ide browser bundle |
 | `watch-ide` | build ide browser bundle in watch-mode |
 | `ide` | start a development server at [http://localhost:8070](http://localhost:8070) and run `watch-ide` in parallel |
