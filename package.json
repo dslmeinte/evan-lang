@@ -6,6 +6,9 @@
     "type": "git",
     "url": "https://github.com/dslmeinte/evan-lang.git"
   },
+  "bin": {
+    "evan": "lib/bin/cmd.js"
+  },
   "scripts": {
     "postinstall": "mkdir -p test/evaluation/actual",
     "build-meta": "node src/meta/build-meta.js",
