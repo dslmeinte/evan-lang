@@ -7,7 +7,8 @@ The IDE should (eventually) be implemented as an Evan program itself, making it 
 
 The following technology is used: Node.js, NPM, TypeScript, Browserify, React and [MobX](https://mobxjs.github.io/mobx/).
 
-## How does it work
+
+# how does it work?
 
 The Evan language is implemented by means of an *evaluator*, which transforms *any* JSON into a JavaScript value.
 Often, this is again JSON but it can also be React DOM elements which are then rendered into a browser.
@@ -15,25 +16,36 @@ The evaluation is in principle functional, in the sense that evaluating the same
 Also, the evaluation is wired to happen incremental (using MobX), so (small) changes to the JSON input should only require a partial re-evaluation, for better performance.
 
 
-## Getting started
+# npm scripts
 
-To get started:
+Type `npm run NAME` to execute any of the commands below:
 
-1. Clone this repository.
-2. In the cloned repository, execute: `npm install`.
-3. To start a Web server with the IDE, execute: `npm start`.
-	Then point a browser to [`http://localhost:8031`](http://localhost:8031) to interact with the IDE.
-	Select an available file/resource to inspect and/or edit and see its evaluation.
-4. To run the tests for the evaluator, execute: `npm test`.
-5. To (re-)build the IDE (after having made changes), execute `npm bundle-web` and re-load it in the browser.
-	Hot reloading isn't implemented yet and meta-circularity of the IDE would actually make that circuitous.
-6. To run the standalone evaluator on arbitrary (but valid) JSON, execute: `npm run build-ts`, `node dist/core/cli.js (<) test/programs/fib.json`.
-	You can input JSON either by specifying a path as last argument or by passing it to `stdin`.
-
-Note that you can use `yarn` instead of `npm` everywhere, although the scripts in `package.json` still reference `npm`.
+| name          | description           |
+| ------------- | ------------- |
+| `test` | run evaluator & meta-model generation tests |
+| `test-watch` | run evaluator & meta-model generation tests in watch-mode |
+| `clean` | clean build artifacts |
+| `build` | transpile `ts(x)``'s' to `lib/`` dir |
+| `watch` | transpile `ts(x)`'s to `lib/`` in watch-mode |
+| `build-ide` | build ide browser bundle |
+| `watch-ide` | build ide browser bundle in watch-mode |
+| `ide` | start a development server at [http://localhost:8070](http://localhost:8070) and run `watch-ide` in parallel |
 
 
-## Documentation
+# usage
+
+```
+evan FILE OPTIONS
+
+Options:
+
+  --semantics    Print TypeScript semantics.
+  -v, --version  Show meta-model version.
+  -h, --help     Show this message.
+```
+
+
+# documentation
 
 All other documentation you can find under [`docs/`](./docs).
 Right now, the menu offers the following selection of dishes:
@@ -45,11 +57,12 @@ Right now, the menu offers the following selection of dishes:
 * [The _External Objects_ mechanism](./docs/external-objects.md)
 
 
-## About the name
+# about the name
 
 As you've probably already noticed, the "Evan" acronym is awkward.
 That's because is retrofitted to the name of my first-born :)
 
-# License
 
-MIT
+# license
+
+mit
