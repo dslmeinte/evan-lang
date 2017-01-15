@@ -9,6 +9,8 @@
   "bin": {
     "evan": "lib/bin/cmd.js"
   },
+  "main": "lib/index.js",
+  "typings": "lib/index",
   "scripts": {
     "postinstall": "mkdir -p test/evaluation/actual",
     "build-meta": "node src/meta/build-meta.js",
