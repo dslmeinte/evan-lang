@@ -1,7 +1,5 @@
-dist/
+lib/
 node_modules/
-
-src/embed-in-browser/web/bundle.js
 
 public/bundle.js
 
