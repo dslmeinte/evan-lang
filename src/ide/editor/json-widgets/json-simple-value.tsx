@@ -4,6 +4,8 @@ import * as React from "react";
 import {BaseEditWidget} from "../base-edit-widget";
 import {SimpleValue, SimpleType, toInfo, coerce, fromString, nothing} from "../utils/simple-value-util";
 
+const styles = require("../styles.scss");
+
 
 @observer
 export class JsonSimpleValue extends BaseEditWidget<SimpleValue> {
@@ -14,7 +16,7 @@ export class JsonSimpleValue extends BaseEditWidget<SimpleValue> {
 
 	private renderValue(value: SimpleValue) {
 		const {type, displayText} = toInfo(value);
-		return <span className={"json-" + SimpleType[type]}>{displayText}</span>;
+		return <span className={styles["json-" + SimpleType[type]]}>{displayText}</span>;
 	}
 
 	private renderValueEdit(value: SimpleValue) {
@@ -64,7 +66,7 @@ export class JsonSimpleValue extends BaseEditWidget<SimpleValue> {
 					checked={targetValue === currentValue}
 					onChange={() => { this.props.accessor.set(targetValue); }}
 				/>
-				<span className="json-nothing">{asText}</span>
+				<span className={styles["json-nothing"]}>{asText}</span>
 			</span>
 		);
 	}

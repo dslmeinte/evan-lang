@@ -9,6 +9,8 @@ import {polyDispatch} from "./polymorphic-dispatcher";
 import {prettyJson} from "./utils/object-util";
 import {isSemanticsTyped, sType} from "../../meta-model";
 
+const styles = require("./styles.scss");
+
 
 export function dispatch(accessor: IAccessor<any>, key?: string) {
 	const json: any = accessor.value;
@@ -22,7 +24,7 @@ export function dispatch(accessor: IAccessor<any>, key?: string) {
 				return component;
 			}
 			return (
-				<div className="indent" key={key}>
+				<div className={styles.indent} key={key}>
 					<span><em>Cannot evaluate object with semantics type "{sType(json)}" (yet?).</em></span>
 					<pre>{prettyJson(json)}</pre>
 				</div>

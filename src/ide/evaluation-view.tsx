@@ -7,6 +7,8 @@ import {prettyJson} from "./editor/utils/object-util";
 import {browser} from "./external-objects/browser";
 import {testObject} from "./external-objects/test-object";
 
+const styles = require("./editor/styles.scss");
+
 
 @observer
 export class EvaluationView extends React.Component<{}, {}> {
@@ -16,7 +18,7 @@ export class EvaluationView extends React.Component<{}, {}> {
 		const externalObjects = { browser, testObject };
 		const evaluation = evaluate(jsonData, externalObjects);
 		return (
-			<div className="evaluation-pane">
+			<div className={styles.evaluationPane}>
 				<span>Evaluation:</span>
 				<pre>
 					{prettyJson(evaluation)}

@@ -4,16 +4,18 @@ import * as React from "react";
 import {exampleRepository} from "./external-objects/example-repository";
 import {editorState} from "./editor/state";
 
+const styles = require("./editor/styles.scss");
+
 
 @observer
 export class RepositoryView extends React.Component<{}, {}> {
 
 	render() {
 		return (
-			<div className="resources-pane">
+			<div className={styles.resourcesPane}>
 				<span>Resource:&nbsp;</span>
 				<select
-					className="resource-selector"
+					className={styles.resourceSelector}
 					ref="resourceSelector"
 					value={editorState.pathLoaded || "none"}
 					onChange={this.handleChange.bind(this)}

@@ -52,6 +52,8 @@
     "ecstatic": "^2.1.0",
     "enzyme": "^2.7.0",
     "glob": "^7.1.1",
+    "insert-css": "^2.0.0",
+    "insert-sass": "^0.1.0",
     "jsdom": "^9.9.1",
     "karma": "^1.4.0",
     "karma-browserify": "^5.1.0",
@@ -62,6 +64,7 @@
     "mobx": "^2.6.1",
     "mobx-react": "^3.5.6",
     "ndjson": "^1.5.0",
+    "node-sass": "^4.3.0",
     "react-addons-test-utils": "^15.4.2",
     "react-dom": "^15.3.2",
     "split2": "^2.1.1",
@@ -73,5 +76,19 @@
     "ud": "^3.1.0",
     "uglify-js": "mishoo/UglifyJS2#harmony",
     "watchify": "^3.8.0"
+  },
+  "browserify": {
+    "transform": [
+      [
+        "insert-sass",
+        {
+          "includePaths": [
+            "src/ide/editor/",
+            "src/ide/",
+            "src/"
+          ]
+        }
+      ]
+    ]
   }
 }

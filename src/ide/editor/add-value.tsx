@@ -7,6 +7,8 @@ import {preventBubbleUp} from "./utils/ui-util";
 import {default as metaModelInstance} from "../instance";
 const sTypes = metaModelInstance.sTypes();
 
+const styles = require("./styles.scss");
+
 
 @observer
 export class AddValue extends React.Component<{ addCallback: (newValue: any) => void; }, { creating: boolean; }> {
@@ -24,13 +26,13 @@ export class AddValue extends React.Component<{ addCallback: (newValue: any) => 
 		].concat(sTypes.map(sType => <option value={sType} key={sType}>{sType}</option>));
 		if (!this.state.creating) {
 			return (
-				<div className="widget">
+				<div className={styles.widget}>
 					<button onClick={this.initiateAdd.bind(this)}>+ Add</button>
 				</div>
 			);
 		}
 		return (
-			<div className="widget focused">
+			<div className={[ styles.widget, styles.focused ].join(" ")}>
 				<span>Type:&nbsp;</span>
 				<select onClick={preventBubbleUp} ref="typeSelector">
 					{options}

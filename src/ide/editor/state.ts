@@ -3,6 +3,7 @@ import {SyntheticEvent} from "react";
 
 import {preventBubbleUp} from "./utils/ui-util";
 
+const styles = require("./styles.scss");
 
 export enum FocusType {
 	none, selected, editing
@@ -38,7 +39,7 @@ export class EditorState {
 	}
 
 	cssClassForSelection(item: any) {
-		return "widget " + ( this.itemFocused === item ? "focused" : "" );
+		return styles.widget + " " + ( this.itemFocused === item ? styles.focused : "" );
 	}
 
 }

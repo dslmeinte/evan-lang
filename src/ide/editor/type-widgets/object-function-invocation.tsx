@@ -6,6 +6,8 @@ import {BaseEditWidget} from "../base-edit-widget";
 import {dispatch} from "../dispatcher";
 import {IObjectFunctionInvocation} from "../../../latest";
 
+const styles = require("../styles.scss");
+
 
 @observer
 export class ObjectFunctionInvocation extends BaseEditWidget<IObjectFunctionInvocation> {
@@ -15,7 +17,7 @@ export class ObjectFunctionInvocation extends BaseEditWidget<IObjectFunctionInvo
 			<div>
 				{dispatch(makePropertyAccessor(objectFunctionInvocation, "object"))}.{dispatch(makePropertyAccessor(objectFunctionInvocation, "function"))} <span>(</span>
 					{objectFunctionInvocation.arguments.map((argument: any, index: any) => (
-						<div className="indent" key={"argument-" + index}>
+						<div className={styles.indent} key={"argument-" + index}>
 							{dispatch(makeArrayAccessor(objectFunctionInvocation.arguments, index))}
 						</div>
 					))}

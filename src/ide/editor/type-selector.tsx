@@ -6,6 +6,8 @@ import {preventBubbleUp} from "./utils/ui-util";
 import {default as metaModelInstance} from "../instance";
 const sTypes = metaModelInstance.sTypes();
 
+const styles = require("./styles.scss");
+
 
 export interface ITypeSelectorProps {
 	initialType: string;
@@ -20,7 +22,7 @@ export class TypeSelector extends React.Component<ITypeSelectorProps, void> {
 		return (
 			<select
 				ref="typeSelector"
-				className="edit-icons"
+				className={styles.editIcons}
 				value={this.props.initialType}
 				onClick={preventBubbleUp}
 				onChange={this.onChange.bind(this)}

@@ -6,6 +6,8 @@ import {BaseEditWidget} from "../base-edit-widget";
 import {dispatch} from "../dispatcher";
 import {IIfThenElse} from "../../../latest";
 
+const styles = require("../styles.scss");
+
 
 @observer
 export class IfThenElse extends BaseEditWidget<IIfThenElse> {
@@ -13,11 +15,11 @@ export class IfThenElse extends BaseEditWidget<IIfThenElse> {
 	renderContents(ifThenElse: IIfThenElse) {
 		return (
 			<div>
-				<span><b>if</b>: </span><div className="indent">
+				<span><b>if</b>: </span><div className={styles.indent}>
 					{dispatch(makePropertyAccessor(ifThenElse, "condition"))}</div>
-				<span><b>then</b>: </span><div className="indent">
+				<span><b>then</b>: </span><div className={styles.indent}>
 					{dispatch(makePropertyAccessor(ifThenElse, "trueBranch"))}</div>
-				<span><b>else</b>: </span><div className="indent">
+				<span><b>else</b>: </span><div className={styles.indent}>
 					{dispatch(makePropertyAccessor(ifThenElse, "falseBranch"))}</div>
 			</div>
 		);

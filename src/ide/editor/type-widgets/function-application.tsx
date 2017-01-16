@@ -7,6 +7,7 @@ import {dispatch} from "../dispatcher";
 import {IFunctionApplication} from "../../../latest";
 import {mapMap} from "../utils/object-util";
 
+const styles = require("../styles.scss");
 
 @observer
 export class FunctionApplication extends BaseEditWidget<IFunctionApplication> {
@@ -16,7 +17,7 @@ export class FunctionApplication extends BaseEditWidget<IFunctionApplication> {
 			<div>
 				{dispatch(makePropertyAccessor(functionApplication, "function"))} <span>(</span>
 					{mapMap(functionApplication.arguments, (argName) => (
-						<div className="indent" key={argName}>
+						<div className={styles.indent} key={argName}>
 							<span>{argName}</span><span>&larr;</span>
 							{dispatch(makePropertyAccessor(functionApplication.arguments, argName))}
 						</div>
