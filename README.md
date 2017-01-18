@@ -1,6 +1,6 @@
-# evan: EValuation of Abstract Nodes
+# Evan: EValuation of Abstract Nodes
 
-a vaguely lispy language in the context of js.
+A vaguely Lispy language in the context of JavaScript.
 
 The Evan language is implemented by means of an *evaluator*, which transforms *any* JSON into a JavaScript value. Often, this is again JSON but it can also be React DOM elements which are then rendered into a browser.
 
