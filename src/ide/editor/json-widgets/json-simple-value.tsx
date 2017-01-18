@@ -16,7 +16,7 @@ export class JsonSimpleValue extends BaseEditWidget<SimpleValue> {
 
 	private renderValue(value: SimpleValue) {
 		const {type, displayText} = toInfo(value);
-		return <span className={styles["json-" + SimpleType[type]]}>{displayText}</span>;
+		return <span className={ styles["json" + capitalize(SimpleType[type])] }>{displayText}</span>;
 	}
 
 	private renderValueEdit(value: SimpleValue) {
@@ -66,7 +66,7 @@ export class JsonSimpleValue extends BaseEditWidget<SimpleValue> {
 					checked={targetValue === currentValue}
 					onChange={() => { this.props.accessor.set(targetValue); }}
 				/>
-				<span className={styles["json-nothing"]}>{asText}</span>
+				<span className={styles.jsonNothing}>{asText}</span>
 			</span>
 		);
 	}
@@ -81,4 +81,8 @@ export class JsonSimpleValue extends BaseEditWidget<SimpleValue> {
 		this.props.accessor.set((this.refs as any).booleanInput.checked);
 	}
 
+}
+
+function capitalize(s: string) {
+	return s.charAt(0).toUpperCase() + s.slice(1);
 }

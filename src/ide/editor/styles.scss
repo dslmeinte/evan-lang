@@ -38,18 +38,18 @@ pre {
 	padding: 5px;
 }
 
-.json-nothing,
-.json-boolean {
+.jsonNothing,
+.jsonBoolean {
 	color: purple;
 	font-style: italic;
 	font-weight: bold;
 }
 
-.json-string {
+.jsonString {
 	color: darkred;
 }
 
-.json-number {
+.jsonNumber {
 	color: darkblue;
 	font-style: italic;
 }
