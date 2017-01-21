@@ -1,7 +1,7 @@
 import {makeIssue, isIssue} from "./issues";
 import {isSemanticsTyped} from "./meta-model";
 import {util} from "./util";
-import * as sTypes from "./latest";
+import * as sTypes from "./semantics";
 import * as React from "react";
 
 /**

@@ -4,7 +4,7 @@ import * as React from "react";
 import {makePropertyAccessor, makeArrayAccessor} from "../utils/accessor";
 import {BaseEditWidget} from "../base-edit-widget";
 import {dispatch} from "../dispatcher";
-import {IObjectFunctionInvocation} from "../../../latest";
+import {IObjectFunctionInvocation} from "../../../semantics";
 
 const styles = require("../styles.scss");
 

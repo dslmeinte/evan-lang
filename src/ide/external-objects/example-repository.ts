@@ -6,7 +6,7 @@ const externalObjects = require("../../../fixtures/programs/external-objects.jso
 const htmlTest = require("../../../fixtures/programs/html-test.json");
 const simple = require("../../../fixtures/programs/simple.json");
 const simpleFunc = require("../../../fixtures/programs/simple-func.json");
-const metaModel = require("../../../latest");
+const metaModel = require("../../../semantics");
 
 
 /**

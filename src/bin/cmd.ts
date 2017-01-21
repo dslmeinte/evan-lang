@@ -17,7 +17,7 @@ const file: string = argv._[0];
 if ((!file && !argv.semantics && !argv.version) || argv.help) {
 	showUsage();
 } else if (argv.semantics) {
-	const data = require("../../latest.json");
+	const data = require("../../semantics.json");
 	const node = new SemanticsNode(data);
 	console.log(node.print());
 	process.exit(0);

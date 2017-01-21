@@ -2,7 +2,7 @@ import {observer} from "mobx-react";
 import * as React from "react";
 
 import {BaseEditWidget} from "../base-edit-widget";
-import {IValueReference} from "../../../latest";
+import {IValueReference} from "../../../semantics";
 
 
 @observer

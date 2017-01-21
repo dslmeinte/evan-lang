@@ -3,7 +3,7 @@ import * as React from "react";
 
 import {BaseEditWidget} from "../base-edit-widget";
 import {makePropertyAccessor} from "../utils/accessor";
-import {IIssue} from "../../../latest";
+import {IIssue} from "../../../semantics";
 
 
 @observer
