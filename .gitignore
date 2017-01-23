@@ -1,11 +1,7 @@
-dist/
+lib/
 node_modules/
-src/embed-in-browser/web/bundle.js
-src/ide/web/bundle.js
-test/evaluation/actual/
 
-**/*.tsx_gen
-**/*_gen.ts*
+public/bundle.js
 
 # Visual Studio Code:
 .vscode/

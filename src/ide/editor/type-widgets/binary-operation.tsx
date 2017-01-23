@@ -4,7 +4,7 @@ import * as React from "react";
 import {BaseEditWidget} from "../base-edit-widget";
 import {makePropertyAccessor} from "../utils/accessor";
 import {dispatch} from "../dispatcher";
-import {IBinaryOperation} from "../../../core/semantics-types_gen";
+import {IBinaryOperation} from "../../../semantics";
 
 
 @observer

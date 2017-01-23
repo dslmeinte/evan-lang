@@ -4,9 +4,10 @@ import * as React from "react";
 import {makePropertyAccessor} from "../utils/accessor";
 import {BaseEditWidget} from "../base-edit-widget";
 import {dispatch} from "../dispatcher";
-import {IFunctionDefinition} from "../../../core/semantics-types_gen";
+import {IFunctionDefinition} from "../../../semantics";
 import {mapMap} from "../utils/object-util";
 
+const styles = require("../styles.scss");
 
 @observer
 export class FunctionDefinition extends BaseEditWidget<IFunctionDefinition> {
@@ -16,13 +17,13 @@ export class FunctionDefinition extends BaseEditWidget<IFunctionDefinition> {
 			<div>
 				<span><b>define</b> </span><span><em>{functionDefinition.name}</em></span><span>(</span>
 					{mapMap(functionDefinition.parameters, (paramName, type) => (
-						<div className="indent" key={paramName}>
+						<div className={styles.indent} key={paramName}>
 							<span>{paramName}</span><span>: </span><span>{type}</span>
 						</div>
 					))}
 				<span>)</span>{functionDefinition.returnType ? <span>: {functionDefinition.returnType}</span> : null}
 				<span> {"{"}</span>
-				<div className="indent">
+				<div className={styles.indent}>
 					{dispatch(makePropertyAccessor(functionDefinition, "body"))}
 				</div>
 				<span>{"}"}</span>

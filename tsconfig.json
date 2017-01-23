@@ -1,23 +1,26 @@
 {
-    "version": "2.0.3",
-    "compilerOptions": {
-        "declaration": false,
-        "experimentalDecorators": true,
-        "jsx": "react",
-        "module": "commonjs",
+	"version": "2.1.4",
+	"compilerOptions": {
+		"declaration": true,
+		"module": "commonjs",
+		"outDir": "lib",
+		"target": "es5",
+		"jsx": "react",
+		"experimentalDecorators": true,
 		"noFallthroughCasesInSwitch": true,
 		"noImplicitAny": true,
 		"noImplicitReturns": true,
 		"noImplicitThis": true,
 		"noUnusedLocals": true,
 		"noUnusedParameters": false,
-        "outDir": "dist/",
 		"suppressImplicitAnyIndexErrors": true,
-		"strictNullChecks": true,
-        "target": "es5"
-    },
-    "filesGlob": [
-        "./src/**/*.ts",
-        "!./node_modules/**/*.ts"
-    ]
+		"strictNullChecks": true
+	},
+	"files": [
+		"src/index.ts",
+		"src/bin/cmd.ts",
+		"src/ide/main.tsx",
+		"src/test/evan.ts",
+		"src/test/meta-model.ts"
+	]
 }

@@ -1,9 +1,10 @@
-import {isObject} from "lodash";
+import {util} from "../../../util";
 import {IObservableArray, isArrayLike} from "mobx";
 
-import {ISemanticsTyped} from "../../../core/base-semantics-types";
-import {isSemanticsTyped} from "../../../meta/meta-model";
+import {ISemanticsTyped} from "../../../semantics";
+import {isSemanticsTyped} from "../../../meta-model";
 
+import * as React from "react";
 
 export type ArrayLike<T> = Array<T> | IObservableArray<T>;
 
@@ -12,7 +13,7 @@ export function type(json: any) {
 		return "json-array";
 	}
 
-	if (isObject(json)) {
+	if (util.isObject(json)) {
 		if (isSemanticsTyped(json)) {
 			const object = json as ISemanticsTyped;
 			return object.$sType;
@@ -28,3 +29,12 @@ export function mapMap<V, R>(map: { [key: string]: V; }, func: (key: string, val
 	return Object.keys(map).map(key => func(key, map[key]));
 }
 
+/**
+ * @returns the given JSON in pretty-printed form (undefined-safe).
+ */
+export function prettyJson(json: any) {
+	if (React.isValidElement(json)) {
+		return json;
+	}
+	return json === undefined ? "undefined" : JSON.stringify(json, null, 2);
+}

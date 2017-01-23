@@ -1,51 +1,94 @@
 {
   "name": "evan-lang",
-  "version": "0.0.1",
-  "description": "A vaguely Lispy language in the context of JavaScript.",
+  "version": "0.1.0",
+  "description": "A vaguely Lispy language in the context of JavaScript",
   "repository": {
     "type": "git",
     "url": "https://github.com/dslmeinte/evan-lang.git"
   },
-  "scripts": {
-    "postinstall": "mkdir -p test/evaluation/actual",
-    "build-meta": "node src/meta/build-meta.js",
-    "build-ts": "tsc",
-    "prebuild-ts": "npm run build-meta",
-    "build": "npm run bundle-ide && npm run bundle-embed",
-    "prebuild": "npm run build-ts",
-    "test": "node dist/test/eval-programs.js && diff --recursive test/evaluation/actual/ test/evaluation/expected/",
-    "pretest": "npm run build-ts && cp src/meta/meta-model.json dist/meta/",
-    "start": "npm run start-ide",
-    "start-ide": "http-server -p 8031 src/ide/web",
-    "prestart-ide": "npm run build",
-    "bundle-ide": "browserify src/ide/index.tsx -p [ tsify ] -o src/ide/web/bundle.js",
-    "watch-ide": "watchify src/ide/index.tsx -p [ tsify ] -o src/ide/web/bundle.js -v",
-    "start-embed": "http-server -p 8032 src/embed-in-browser/web",
-    "prestart-embed": "npm run build",
-    "bundle-embed": "browserify src/embed-in-browser/index.tsx -p [ tsify ] -o src/embed-in-browser/web/bundle.js",
-    "watch-embed": "watchify src/embed-in-browser/index.tsx -p [ tsify ] -o src/embed-in-browser/web/bundle.js -v",
-    "clean": "rimraf ide/editor/type-widgets/*.tsx_gen && rimraf test/evaluation/actual && rimraf dist && rimraf node_modules && rm src/ide/web/bundle.js && rm src/embed-in-browser/web/bundle.js"
+  "bin": {
+    "evan": "lib/bin/cmd.js"
   },
-  "author": "Meinte Boersma",
+  "main": "lib/index.js",
+  "typings": "lib/index",
+  "scripts": {
+    "test": "npm run build && tape lib/test/*.js | tap-diff",
+    "test-watch": "npm run build && concurrently --raw \"npm run watch\" \"tape-watch lib/test/*.js -p tap-diff\" --kill-others",
+    "karma": "karma start --log-level error",
+    "karma-watch": "WATCH=true karma start --log-level error",
+    "clean": "rm -fr lib && rm -f public/bundle.js",
+    "build": "npm run clean && tsc",
+    "prepublish": "npm run test && npm run build",
+    "watch": "npm run clean && tsc --watch",
+    "build-ide": "NODE_ENV=production browserify -p tsify -r ud/noop:ud src/ide/main.tsx | uglifyjs -c > public/bundle.js",
+    "watch-ide": "watchify src/ide/main.tsx -p browserify-hmr -p tsify -o public/bundle.js -dv",
+    "ide": "npm run clean && concurrently --raw \"ecstatic -p 8070 public\" \"npm run watch-ide\" --kill-others"
+  },
+  "contributors": [
+    "Meinte Boersma <meinte.boersma@gmail.com> (http://www.dslconsultancy.com/)",
+    "Onur Gunduz <ogunduz@gmail.com> (http://onurgunduz.com/)"
+  ],
   "license": "MIT",
   "dependencies": {
-    "@types/lodash": "^4.14.44",
+    "indent-string": "^3.0.0",
+    "is-integer": "^1.0.6",
+    "minimist": "^1.2.0",
+    "react": "^15.3.2"
+  },
+  "devDependencies": {
+    "@types/enzyme": "^2.7.1",
+    "@types/minimist": "^1.2.0",
     "@types/node": "^6.0.52",
     "@types/react": "^0.14.55",
     "@types/react-dom": "^0.14.19",
-    "lodash": "^4.16.1",
+    "@types/tape": "^4.2.28",
+    "babel-preset-airbnb": "^2.1.1",
+    "babelify": "^7.3.0",
+    "brfs": "^1.4.3",
+    "browserify": "^13.3.0",
+    "browserify-hmr": "^0.3.5",
+    "concurrently": "^3.1.0",
+    "debug": "^2.6.0",
+    "ecstatic": "^2.1.0",
+    "enzyme": "^2.7.0",
+    "glob": "^7.1.1",
+    "insert-css": "^2.0.0",
+    "insert-sass": "^0.1.0",
+    "jsdom": "^9.9.1",
+    "karma": "^1.4.0",
+    "karma-browserify": "^5.1.0",
+    "karma-chrome-launcher": "^2.0.0",
+    "karma-jsdom-launcher": "^5.0.0",
+    "karma-tap": "^3.1.1",
+    "karma-tap-pretty-reporter": "^3.0.5",
     "mobx": "^2.6.1",
     "mobx-react": "^3.5.6",
-    "react": "^15.3.2",
-    "react-dom": "^15.3.2"
-  },
-  "devDependencies": {
-    "browserify": "^13.1.0",
-    "camelcase": "^3.0.0",
-    "http-server": "^0.9.0",
-    "rimraf": "^2.5.4",
-    "tsify": "^1.0.7",
+    "ndjson": "^1.5.0",
+    "node-sass": "^4.3.0",
+    "react-addons-test-utils": "^15.4.2",
+    "react-dom": "^15.3.2",
+    "split2": "^2.1.1",
+    "tap-diff": "^0.1.1",
+    "tape": "^4.6.3",
+    "tape-watch": "^2.2.4",
+    "tsify": "^3.0.0",
     "typescript": "^2.1.4",
-    "watchify": "^3.7.0"
+    "ud": "^3.1.0",
+    "uglify-js": "mishoo/UglifyJS2#harmony",
+    "watchify": "^3.8.0"
+  },
+  "browserify": {
+    "transform": [
+      [
+        "insert-sass",
+        {
+          "includePaths": [
+            "src/ide/editor/",
+            "src/ide/",
+            "src/"
+          ]
+        }
+      ]
+    ]
   }
 }

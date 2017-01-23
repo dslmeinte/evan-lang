@@ -1,4 +1,4 @@
-import {isString, isNumber, isBoolean} from "lodash";
+import {util} from "../../../util";
 
 
 export type nothing = null | undefined;
@@ -18,13 +18,13 @@ export function toInfo(value: SimpleValue): ISimpleValueInfo {
 	if (value === undefined || value === null) {
 		return { type: SimpleType.nothing, displayText: ( value === undefined ? "undefined" : "null" ) };
 	}
-	if (isString(value)) {
+	if (util.isString(value)) {
 		return { type: SimpleType.string, displayText: "\"" + value + "\"" };
 	}
-	if (isNumber(value)) {
+	if (util.isInteger(value)) {
 		return { type: SimpleType.number, displayText: "" + value };
 	}
-	if (isBoolean(value)) {
+	if (util.isBoolean(value)) {
 		return { type: SimpleType.boolean, displayText: "" + value };
 	}
 	throw new Error(`Simple value not handled in #toInfo: ${value} (typeof=${typeof value})`);

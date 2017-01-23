@@ -1,13 +1,14 @@
-html, body {
+html,
+body {
 	font: 11pt normal Arial, Helvetica, sans-serif; 
-}
-
-.indent {
-	margin-left: 2em;
 }
 
 pre {
 	margin: 0em;
+}
+
+.indent {
+	margin-left: 2em;
 }
 
 .focused {
@@ -22,46 +23,55 @@ pre {
 	margin-bottom: 0.5em;
 }
 
-
-.editor-pane {
+.editorPane {
 	width: 55%;
 	float: left;
 }
 
-.evaluation-pane {
+.evaluationPane {
 	margin-left: 1em;
 	width: 40%;
 	float: left;
 }
 
-
 .widget {
 	padding: 5px;
 }
 
-
-.json-nothing, .json-boolean {
+.jsonNothing,
+.jsonBoolean {
 	color: purple;
 	font-style: italic;
 	font-weight: bold;
 }
 
-.json-string {
+.jsonString {
 	color: darkred;
 }
 
-.json-number {
+.jsonNumber {
 	color: darkblue;
 	font-style: italic;
 }
 
-.widget > .edit-icons {
+.widget > .editIcons {
 	display: none;
 }
 
-.widget.focused > .edit-icons {
+.widget.focused > .editIcons {
 	display: block;
 	float: right;
 	font-family: monospace;
 }
 
+.resourcesPane {
+	/* todo */
+}
+
+.resourceSelector {
+	/* todo */
+}
+
+.error {
+	/* todo */
+}

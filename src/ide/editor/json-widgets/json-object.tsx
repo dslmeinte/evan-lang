@@ -1,4 +1,3 @@
-import {isEmpty} from "lodash";
 import {observer} from "mobx-react";
 import * as React from "react";
 
@@ -7,6 +6,7 @@ import {makeJsonPropertyAccessor} from "../utils/json-property-util";
 import {BaseEditWidget} from "../base-edit-widget";
 import {preventBubbleUp} from "../utils/ui-util";
 
+const styles = require("../styles.scss");
 
 @observer
 export class JsonObject<T extends Object> extends BaseEditWidget<T> {
@@ -15,7 +15,7 @@ export class JsonObject<T extends Object> extends BaseEditWidget<T> {
 		const propertyNames = Object.keys(object);
 		return [
 			<span key={"{"}>{"{"}</span>,
-			<div key="body" className="indent">
+			<div key="body" className={styles.indent}>
 				{propertyNames.map(name => <JsonProperty key={name} accessor={makeJsonPropertyAccessor(object, name)} />)}
 				{this.isSelected()
 					? (
@@ -23,7 +23,7 @@ export class JsonObject<T extends Object> extends BaseEditWidget<T> {
 							New property:&nbsp;
 							<input ref="nameNewProperty" type="text" placeholder="new name" onClick={preventBubbleUp} />
 							<button onClick={this.onCreate.bind(this)} disabled={!! this.validateName()}>Create</button>
-							<span className="error">{this.validateName()}</span>
+							<span className={styles.error}>{this.validateName()}</span>
 						</span>
 					)
 					: null
@@ -46,7 +46,7 @@ export class JsonObject<T extends Object> extends BaseEditWidget<T> {
 
 	private validateName(): string | null {
 		const name = this.newName();
-		if (isEmpty(name)) {
+		if (!name) {
 			return "name cannot be empty";
 		}
 		// TODO  add more name validation

@@ -1,7 +1,5 @@
-import {isObject} from "lodash";
-
-import {IIssue} from "../core/semantics-types_gen";
-
+import {IIssue} from "./semantics";
+import {util} from "./util";
 
 /**
  * Creates and @returns an issue object
@@ -23,6 +21,5 @@ export function makeIssue(message: string, object?: Object): IIssue {
  * @returns whether the given value is an issue object.
  */
 export function isIssue(value: any) {
-	return isObject(value) && value.$sType === "issue";
+	return util.isObject(value) && value.$sType === "issue";
 }
-

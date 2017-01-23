@@ -1,12 +1,13 @@
 import {observer} from "mobx-react";
 import * as React from "react";
-import {indexOf} from "lodash";
 
 import {editorState, FocusType} from "./state";
 import {preventBubbleUp} from "./utils/ui-util";
 
-import {default as metaModelInstance} from "../../meta/meta-model";
+import {default as metaModelInstance} from "../instance";
 const sTypes = metaModelInstance.sTypes();
+
+const styles = require("./styles.scss");
 
 
 @observer
@@ -25,13 +26,13 @@ export class AddValue extends React.Component<{ addCallback: (newValue: any) => 
 		].concat(sTypes.map(sType => <option value={sType} key={sType}>{sType}</option>));
 		if (!this.state.creating) {
 			return (
-				<div className="widget">
+				<div className={styles.widget}>
 					<button onClick={this.initiateAdd.bind(this)}>+ Add</button>
 				</div>
 			);
 		}
 		return (
-			<div className="widget focused">
+			<div className={[ styles.widget, styles.focused ].join(" ")}>
 				<span>Type:&nbsp;</span>
 				<select onClick={preventBubbleUp} ref="typeSelector">
 					{options}
@@ -69,7 +70,7 @@ export class AddValue extends React.Component<{ addCallback: (newValue: any) => 
 				case "json-object": return {};
 				case "json-simple-value": return undefined;
 				default: {
-					if (indexOf(sTypes, type) < 0) {
+					if (sTypes.indexOf(type) < 0) {
 						throw new Error(`Cannot create instance of: ${type}`);
 					}
 					return metaModelInstance.createOfSType(type);

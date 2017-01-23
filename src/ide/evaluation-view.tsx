@@ -1,11 +1,13 @@
 import {observer} from "mobx-react";
 import * as React from "react";
 
-import {evaluate} from "../core/evaluator";
+import {evaluate} from "../evan";
 import {editorState} from "./editor/state";
-import {prettyJson} from "../core/util";
-import {browser} from "../external-objects/browser";
-import {testObject} from "../external-objects/test-object";
+import {prettyJson} from "./editor/utils/object-util";
+import {browser} from "./external-objects/browser";
+import {testObject} from "./external-objects/test-object";
+
+const styles = require("./editor/styles.scss");
 
 
 @observer
@@ -16,7 +18,7 @@ export class EvaluationView extends React.Component<{}, {}> {
 		const externalObjects = { browser, testObject };
 		const evaluation = evaluate(jsonData, externalObjects);
 		return (
-			<div className="evaluation-pane">
+			<div className={styles.evaluationPane}>
 				<span>Evaluation:</span>
 				<pre>
 					{prettyJson(evaluation)}
